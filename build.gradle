@@ -25,6 +25,10 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.22.0'
+	implementation group: 'org.liquibase', name: 'liquibase-groovy-dsl', version: '3.0.3'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
