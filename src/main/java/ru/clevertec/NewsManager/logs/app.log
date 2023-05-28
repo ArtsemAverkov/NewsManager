@@ -1,0 +1,102 @@
+2023-05-28 08:20:00,564 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-05-28 08:20:00,653 INFO r.c.N.NewsManagerApplication [main] Starting NewsManagerApplication using Java 17.0.2 with PID 30015 (/Users/artemaverkov/Concurrency/NewsManager/NewsManager/build/classes/java/main started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-05-28 08:20:00,653 DEBUG r.c.N.NewsManagerApplication [main] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-05-28 08:20:00,655 INFO r.c.N.NewsManagerApplication [main] The following 1 profile is active: "prod"
+2023-05-28 08:20:02,257 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-28 08:20:02,346 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 82 ms. Found 2 JPA repository interfaces.
+2023-05-28 08:20:03,490 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2023-05-28 08:20:03,500 INFO o.a.c.h.Http11NioProtocol [main] Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-28 08:20:03,501 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2023-05-28 08:20:03,501 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-28 08:20:03,697 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2023-05-28 08:20:03,698 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2554 ms
+2023-05-28 08:20:03,938 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2023-05-28 08:20:04,034 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61d60e38
+2023-05-28 08:20:04,036 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-05-28 08:20:04,301 INFO l.database [main] Set default schema name to public
+2023-05-28 08:20:04,459 INFO l.lockservice [main] Successfully acquired change log lock
+2023-05-28 08:20:05,148 INFO l.changelog [main] Reading from public.databasechangelog
+2023-05-28 08:20:05,198 INFO l.changelog [main] Reading from public.databasechangelog
+2023-05-28 08:20:05,209 INFO l.util [main] UPDATE SUMMARY
+2023-05-28 08:20:05,210 INFO l.util [main] Run:                          0
+2023-05-28 08:20:05,210 INFO l.util [main] Previously run:               5
+2023-05-28 08:20:05,210 INFO l.util [main] Filtered out:                 0
+2023-05-28 08:20:05,210 INFO l.util [main] -------------------------------
+2023-05-28 08:20:05,210 INFO l.util [main] Total change sets:            5
+
+2023-05-28 08:20:05,211 INFO l.util [main] Update summary generated
+2023-05-28 08:20:05,216 INFO l.lockservice [main] Successfully released change log lock
+2023-05-28 08:20:05,223 INFO l.lockservice [main] Successfully released change log lock
+2023-05-28 08:20:05,224 INFO l.command [main] Command execution complete
+2023-05-28 08:20:05,407 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-28 08:20:05,454 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.2.2.Final
+2023-05-28 08:20:05,456 INFO o.h.c.Environment [main] HHH000406: Using bytecode reflection optimizer
+2023-05-28 08:20:05,589 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-05-28 08:20:05,702 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-05-28 08:20:05,746 INFO o.h.o.dialect [main] HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@14499b52
+2023-05-28 08:20:05,941 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-05-28 08:20:06,647 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-28 08:20:06,777 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 08:20:07,435 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-05-28 08:20:08,028 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-28 08:20:08,611 INFO o.a.c.h.Http11NioProtocol [main] Starting ProtocolHandler ["http-nio-8080"]
+2023-05-28 08:20:08,644 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-28 08:20:08,658 INFO r.c.N.NewsManagerApplication [main] Started NewsManagerApplication in 8.687 seconds (process running for 9.685)
+2023-05-28 08:20:25,439 INFO o.a.c.c.C.[.[.[/] [http-nio-8080-exec-3] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-28 08:20:25,440 INFO o.s.w.s.DispatcherServlet [http-nio-8080-exec-3] Initializing Servlet 'dispatcherServlet'
+2023-05-28 08:20:25,445 INFO o.s.w.s.DispatcherServlet [http-nio-8080-exec-3] Completed initialization in 4 ms
+2023-05-28 08:20:41,842 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 08:20:41,850 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-28 08:20:41,857 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-05-28 08:26:04,236 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-05-28 08:26:04,291 INFO r.c.N.NewsManagerApplication [main] Starting NewsManagerApplication using Java 17.0.2 with PID 30844 (/Users/artemaverkov/Concurrency/NewsManager/NewsManager/build/classes/java/main started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-05-28 08:26:04,291 DEBUG r.c.N.NewsManagerApplication [main] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-05-28 08:26:04,294 INFO r.c.N.NewsManagerApplication [main] The following 1 profile is active: "prod"
+2023-05-28 08:26:05,933 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-28 08:26:06,022 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 81 ms. Found 2 JPA repository interfaces.
+2023-05-28 08:26:07,630 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2023-05-28 08:26:07,643 INFO o.a.c.h.Http11NioProtocol [main] Initializing ProtocolHandler ["http-nio-8080"]
+2023-05-28 08:26:07,644 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2023-05-28 08:26:07,644 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-28 08:26:07,872 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2023-05-28 08:26:07,873 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3086 ms
+2023-05-28 08:26:08,169 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2023-05-28 08:26:08,292 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@ef86c72
+2023-05-28 08:26:08,293 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-05-28 08:26:08,610 INFO l.database [main] Set default schema name to public
+2023-05-28 08:26:09,064 INFO l.lockservice [main] Successfully acquired change log lock
+2023-05-28 08:26:10,213 INFO l.changelog [main] Reading from public.databasechangelog
+2023-05-28 08:26:10,411 INFO l.changelog [main] Reading from public.databasechangelog
+2023-05-28 08:26:10,442 INFO l.util [main] UPDATE SUMMARY
+2023-05-28 08:26:10,445 INFO l.util [main] Run:                          0
+2023-05-28 08:26:10,446 INFO l.util [main] Previously run:               5
+2023-05-28 08:26:10,446 INFO l.util [main] Filtered out:                 0
+2023-05-28 08:26:10,446 INFO l.util [main] -------------------------------
+2023-05-28 08:26:10,446 INFO l.util [main] Total change sets:            5
+
+2023-05-28 08:26:10,453 INFO l.util [main] Update summary generated
+2023-05-28 08:26:10,464 INFO l.lockservice [main] Successfully released change log lock
+2023-05-28 08:26:10,485 INFO l.lockservice [main] Successfully released change log lock
+2023-05-28 08:26:10,486 INFO l.command [main] Command execution complete
+2023-05-28 08:26:11,395 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-28 08:26:11,539 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.2.2.Final
+2023-05-28 08:26:11,544 INFO o.h.c.Environment [main] HHH000406: Using bytecode reflection optimizer
+2023-05-28 08:26:11,732 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-05-28 08:26:11,893 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-05-28 08:26:11,940 INFO o.h.o.dialect [main] HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@787a0fd6
+2023-05-28 08:26:12,359 INFO o.h.b.i.BytecodeProviderInitiator [main] HHH000021: Bytecode provider name : bytebuddy
+2023-05-28 08:26:13,239 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-28 08:26:13,365 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 08:26:14,169 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-05-28 08:26:15,450 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-28 08:26:16,677 INFO o.a.c.h.Http11NioProtocol [main] Starting ProtocolHandler ["http-nio-8080"]
+2023-05-28 08:26:16,711 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-28 08:26:16,733 INFO r.c.N.NewsManagerApplication [main] Started NewsManagerApplication in 13.039 seconds (process running for 13.999)
+2023-05-28 08:26:29,656 INFO o.a.c.c.C.[.[.[/] [http-nio-8080-exec-4] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-28 08:26:29,657 INFO o.s.w.s.DispatcherServlet [http-nio-8080-exec-4] Initializing Servlet 'dispatcherServlet'
+2023-05-28 08:26:29,662 INFO o.s.w.s.DispatcherServlet [http-nio-8080-exec-4] Completed initialization in 5 ms
+2023-05-28 08:26:29,743 INFO r.c.N.a.l.ControllerLogAspect [http-nio-8080-exec-4] ----->GET:NewsController.readAll(..):URI is/newsARGUMENT is(pageable=Page request [number: 0, size 10, sort: UNSORTED]}
+2023-05-28 08:26:29,868 INFO r.c.N.a.l.ControllerLogAspect [http-nio-8080-exec-4] <-----GET:NewsController.readAll(..):URI is/news, result is [News(id=1, time=2023-05-26T00:00, title=Sample News Title, text=Sample News Text), News(id=2, time=2023-05-26T00:00, title=Sample News Title, text=Sample News Text)]ARGUMENT is(pageable=Page request [number: 0, size 10, sort: UNSORTED]}
+2023-05-28 08:26:45,941 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-28 08:26:45,965 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-28 08:26:45,973 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
