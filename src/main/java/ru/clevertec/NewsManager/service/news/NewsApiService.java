@@ -3,6 +3,7 @@ package ru.clevertec.NewsManager.service.news;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.clevertec.NewsManager.aop.cache.Cacheable;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
 import ru.clevertec.NewsManager.dto.response.CommentResponseDto;
 import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
@@ -23,12 +24,14 @@ public class NewsApiService implements NewsService {
     private final NewsRepository newsRepository;
 
 
+    @Cacheable("myCache")
     @Override
     public long create(NewsRequestDto news) {
         News buildCreateNews = buildCreateNews(news);
         return newsRepository.save(buildCreateNews).getId();
     }
 
+    @Cacheable("myCache")
     @Override
     public News read(long id) {
         return newsRepository.findById(id).orElseThrow(()->
@@ -45,6 +48,8 @@ public class NewsApiService implements NewsService {
             return newsRepository.searchNews(query, date);
     }
 
+
+    @Cacheable("myCache")
     @Override
     public boolean update(NewsRequestDto news, Long id) {
         News readNews = read(id);
@@ -55,6 +60,7 @@ public class NewsApiService implements NewsService {
         return true;
     }
 
+    @Cacheable("myCache")
     @Override
     public boolean delete(Long id) {
         read(id);

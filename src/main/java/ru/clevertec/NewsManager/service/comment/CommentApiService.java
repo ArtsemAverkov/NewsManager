@@ -3,6 +3,7 @@ package ru.clevertec.NewsManager.service.comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.clevertec.NewsManager.aop.cache.Cacheable;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
@@ -21,6 +22,7 @@ public class CommentApiService implements CommentService{
     private final CommentRepository commentRepository;
     private final NewsService newsService;
 
+    @Cacheable("myCache")
     @Override
     public long create(CommentRequestDto comment) {
         News news = newsService.read(comment.getNewsId());
@@ -29,12 +31,14 @@ public class CommentApiService implements CommentService{
         return commentRepository.save(builderComment).getId();
     }
 
+    @Cacheable("myCache")
     @Override
     public Comment read(long id) {
         return commentRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("Invalid Comment Id:" + id));
     }
 
+    @Cacheable("myCache")
     @Override
     public boolean update(CommentRequestDto comment, Long id) {
         Comment readComment = read(id);
@@ -45,6 +49,7 @@ public class CommentApiService implements CommentService{
         return true;
     }
 
+    @Cacheable("myCache")
     @Override
     public boolean delete(Long id) {
         read(id);
