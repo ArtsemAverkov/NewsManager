@@ -19,6 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewsController {
 
+
+
     private final NewsService newsService;
 
     @PostMapping
@@ -28,12 +30,6 @@ public class NewsController {
     }
 
     @GetMapping(value= "/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public News read(@PathVariable  @Valid Long id) {
-        return newsService.read(id);
-    }
-
-    @GetMapping(value= "with_comments/{id}")
     @ResponseStatus(HttpStatus.OK)
     public NewsResponseDto readWithComments(@PathVariable  @Valid Long id) {
         return newsService.readNewsWithComments(id);
@@ -59,7 +55,7 @@ public class NewsController {
     }
 
     @GetMapping
-    public List<News> readAll(@PageableDefault Pageable pageable){
+    public List<NewsResponseDto> readAll(@PageableDefault Pageable pageable){
         return newsService.readAll(pageable);
     }
 }

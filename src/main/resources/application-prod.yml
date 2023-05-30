@@ -16,3 +16,17 @@ spring:
 cache:
   max-size: 5
   algorithm: LRU
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+server:
+  port: 8088
+---
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false

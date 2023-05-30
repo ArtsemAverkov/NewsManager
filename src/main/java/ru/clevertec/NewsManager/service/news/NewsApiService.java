@@ -69,8 +69,22 @@ public class NewsApiService implements NewsService {
     }
 
     @Override
-    public List<News> readAll(Pageable pageable) {
-        return newsRepository.findAll(pageable).getContent();
+    public List<NewsResponseDto> readAll(Pageable pageable) {
+        return buildResponseList(newsRepository.findAll(pageable).getContent()) ;
+    }
+
+    public  List<NewsResponseDto> buildResponseList (List<News> news){
+        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
+        for (News response :news) {
+            NewsResponseDto build = NewsResponseDto.builder()
+                    .time(response.getTime())
+                    .text(response.getText())
+                    .title(response.getTitle())
+                    .comments(convertComment(response.getComment()))
+                    .build();
+        newsResponseDtoList.add(build);
+        }
+        return newsResponseDtoList;
     }
 
     public NewsResponseDto buildResponse (News news){

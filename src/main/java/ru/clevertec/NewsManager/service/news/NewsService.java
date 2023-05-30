@@ -14,7 +14,7 @@ public interface NewsService {
     News read (long id);
     boolean update (NewsRequestDto news, Long id);
     boolean delete (Long id);
-    List<News> readAll (Pageable pageable);
+    List<NewsResponseDto> readAll (Pageable pageable);
     NewsResponseDto readNewsWithComments(Long id);
     List<News> searchNews(String query, LocalDate date);
 }
