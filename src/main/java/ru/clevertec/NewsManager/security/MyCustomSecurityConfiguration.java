@@ -1,11 +1,14 @@
 package ru.clevertec.NewsManager.security;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -13,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import ru.clevertec.NewsManager.dto.response.User;
 import ru.clevertec.NewsManager.repository.UserManagementClient;
+
+import java.io.IOException;
 
 
 @Configuration
@@ -28,16 +33,17 @@ public class MyCustomSecurityConfiguration {
                 .authorizeRequests(
                         (authorizeRequests) ->
                                 authorizeRequests
-                                        .requestMatchers("/news").permitAll()
+                                        .requestMatchers("/news","/users").permitAll()
                                         .requestMatchers("/news/**").hasAnyRole("JOURNALIST","ADMIN")
                                         .requestMatchers("/comment/**").hasAnyRole("SUBSCRIBER","ADMIN")
-                                        .requestMatchers("/user/**").hasRole("ADMIN")
+                                        .requestMatchers("/users/**","/users/admin").hasRole("ADMIN")
 
                 )
                 .formLogin((formLogin) ->
                         formLogin
                                 .loginProcessingUrl("/login")
                                 .permitAll()
+                                .defaultSuccessUrl("/welcome", true)
                 )
                 .sessionManagement((sessionManagement) ->
                         sessionManagement
@@ -49,10 +55,10 @@ public class MyCustomSecurityConfiguration {
                 )
                 .logout((logout) ->
                         logout
-                                .logoutUrl("/logout") // URL для выхода из сессии
-                                .logoutSuccessUrl("/login") // URL, на который перенаправляется после успешного выхода из сессии
-                                .invalidateHttpSession(true) // инвалидировать HTTP-сессию пользователя после выхода
-                                .deleteCookies("JSESSIONID") // удалить куки после выхода
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/login")
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID")
                 );
 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -84,6 +90,15 @@ public class MyCustomSecurityConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    private void handleLoginSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws  IOException {
+        // Получение имени пользователя из успешно аутентифицированного объекта Authentication
+        String username = authentication.getName();
+
+        // Отправка сообщения об успешной аутентификации и приветствие с именем пользователя
+        String message = "Успешная аутентификация. Добро пожаловать, " + username + "!";
+        response.getWriter().write(message);
     }
 }
 

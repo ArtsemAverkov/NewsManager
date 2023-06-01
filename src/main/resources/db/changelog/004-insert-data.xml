@@ -8,6 +8,7 @@
             <column name="time" value="2023-05-26"/>
             <column name="title" value="Sample News Title"/>
             <column name="text" value="Sample News Text"/>
+            <column name="author" type="Author"/>
         </insert>
     </changeSet>
 

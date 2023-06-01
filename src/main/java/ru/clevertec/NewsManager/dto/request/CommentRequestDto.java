@@ -10,5 +10,4 @@ import lombok.*;
 public class CommentRequestDto {
     private Long newsId;
     private String text;
-    private String username;
 }

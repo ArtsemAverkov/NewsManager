@@ -2,6 +2,9 @@ package ru.clevertec.NewsManager.service.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.clevertec.NewsManager.aop.cache.Cacheable;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
@@ -40,21 +43,31 @@ public class CommentApiService implements CommentService{
 
     @Cacheable("myCache")
     @Override
-    public boolean update(CommentRequestDto comment, Long id) {
+    public void update(CommentRequestDto comment, Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Comment readComment = read(id);
-        LocalDateTime time = readComment.getTime();
-        readComment.setId(id);
-        Comment builderUpdateComment = builderUpdateComment(comment, time);
-        commentRepository.save(builderUpdateComment);
-        return true;
+        if (readComment.getUsername().equals(authentication.getName())) {
+            LocalDateTime time = readComment.getTime();
+            readComment.setId(id);
+            Comment builderUpdateComment = builderUpdateComment(comment, time);
+            commentRepository.save(builderUpdateComment);
+        } else {
+            throw new AccessDeniedException(
+                    "You do not have permission to update the comment as you are not the author of this comment.");
+        }
     }
 
     @Cacheable("myCache")
     @Override
-    public boolean delete(Long id) {
-        read(id);
-        commentRepository.deleteById(id);
-        return true;
+    public void delete(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Comment readComment = read(id);
+        if (readComment.getUsername().equals(authentication.getName())) {
+            commentRepository.deleteById(id);
+        } else {
+            throw new AccessDeniedException(
+                    "You do not have permission to delete this comment because you are not the author of this comment.");
+        }
     }
 
     @Override
@@ -68,18 +81,20 @@ public class CommentApiService implements CommentService{
     }
 
     private Comment builderCreateComment(CommentRequestDto commentRequestDto){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return Comment.builder()
                 .time(LocalDateTime.now())
                 .text(commentRequestDto.getText())
-                .username(commentRequestDto.getUsername())
+                .username(authentication.getName())
                 .build();
     }
 
     private Comment builderUpdateComment(CommentRequestDto commentRequestDto, LocalDateTime data){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return Comment.builder()
                 .time(data)
                 .text(commentRequestDto.getText())
-                .username(commentRequestDto.getUsername())
+                .username(authentication.getName())
                 .build();
     }
 }

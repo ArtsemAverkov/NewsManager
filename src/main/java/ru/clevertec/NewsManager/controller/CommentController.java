@@ -20,6 +20,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Long create(@RequestBody @Valid CommentRequestDto comment){
@@ -34,14 +35,14 @@ public class CommentController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestDto comment){
-        return commentService.update(comment, id);
+    public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestDto comment){
+        commentService.update(comment, id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean delete(@PathVariable @Valid Long id){
-        return commentService.delete(id);
+    public void delete(@PathVariable @Valid Long id){
+         commentService.delete(id);
     }
 
     @GetMapping(value = "/search")

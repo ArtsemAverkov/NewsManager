@@ -12,8 +12,8 @@ import java.util.List;
 public interface NewsService {
     long create(NewsRequestDto news);
     News read (long id);
-    boolean update (NewsRequestDto news, Long id);
-    boolean delete (Long id);
+    void update (NewsRequestDto news, Long id);
+    void delete (Long id);
     List<NewsResponseDto> readAll (Pageable pageable);
     NewsResponseDto readNewsWithComments(Long id);
     List<News> searchNews(String query, LocalDate date);

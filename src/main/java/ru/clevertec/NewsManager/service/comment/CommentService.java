@@ -14,8 +14,8 @@ public interface CommentService {
 
     long create(CommentRequestDto comment);
     Comment read (long id);
-    boolean update (CommentRequestDto comment, Long id);
-    boolean delete (Long id);
+    void update (CommentRequestDto comment, Long id);
+    void delete (Long id);
     List<Comment> readAll (Pageable pageable);
     List<Comment> searchComments(String query, LocalDate date);
 }

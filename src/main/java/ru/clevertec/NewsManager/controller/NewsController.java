@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
 import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
@@ -22,6 +24,7 @@ public class NewsController {
 
 
     private final NewsService newsService;
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -44,14 +47,14 @@ public class NewsController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean update(@PathVariable @Valid Long id, @RequestBody @Valid NewsRequestDto news){
-        return newsService.update(news, id);
+    public void update(@PathVariable @Valid Long id, @RequestBody @Valid NewsRequestDto news){
+         newsService.update(news, id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean delete(@PathVariable @Valid Long id){
-        return newsService.delete(id);
+    public void delete(@PathVariable @Valid Long id){
+         newsService.delete(id);
     }
 
     @GetMapping

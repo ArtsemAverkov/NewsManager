@@ -2,6 +2,9 @@ package ru.clevertec.NewsManager.service.news;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.clevertec.NewsManager.aop.cache.Cacheable;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
@@ -51,21 +54,32 @@ public class NewsApiService implements NewsService {
 
     @Cacheable("myCache")
     @Override
-    public boolean update(NewsRequestDto news, Long id) {
+    public void update(NewsRequestDto news, Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         News readNews = read(id);
-        readNews.setId(id);
-        LocalDateTime timeCreateNews = readNews.getTime();
-        News buildUpdateNews = buildUpdateNews(news, timeCreateNews);
-        newsRepository.save(buildUpdateNews);
-        return true;
+        if (readNews.getAuthor().equals(authentication.getName())) {
+            readNews.setId(id);
+            LocalDateTime timeCreateNews = readNews.getTime();
+            News buildUpdateNews = buildUpdateNews(news, timeCreateNews);
+            newsRepository.save(buildUpdateNews);
+        } else {
+            throw new AccessDeniedException(
+                    "You do not have rights to update the news because you are not the author of this news");
+        }
     }
 
     @Cacheable("myCache")
     @Override
-    public boolean delete(Long id) {
-        read(id);
-        newsRepository.deleteById(id);
-        return true;
+    public void delete(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        News read = read(id);
+        if (read.getAuthor().equals(authentication.getName())) {
+            newsRepository.deleteById(id);
+        } else {
+            throw new AccessDeniedException(
+                    "You do not have rights to delete the news because you are not the author of this news");
+        }
+
     }
 
     @Override
@@ -80,6 +94,7 @@ public class NewsApiService implements NewsService {
                     .time(response.getTime())
                     .text(response.getText())
                     .title(response.getTitle())
+                    .author(response.getAuthor())
                     .comments(convertComment(response.getComment()))
                     .build();
         newsResponseDtoList.add(build);
@@ -92,6 +107,7 @@ public class NewsApiService implements NewsService {
                 .time(news.getTime())
                 .text(news.getText())
                 .title(news.getTitle())
+                .author(news.getAuthor())
                 .comments(convertComment(news.getComment()))
                 .build();
     }
@@ -110,19 +126,23 @@ public class NewsApiService implements NewsService {
     }
 
     private News buildCreateNews(NewsRequestDto news){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LocalDateTime now = LocalDateTime.now();
         return News.builder()
                 .time(now)
                 .title(news.getTitle())
                 .text(news.getText())
+                .author(authentication.getName())
                 .build();
     }
 
     private News buildUpdateNews(NewsRequestDto news, LocalDateTime time){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return News.builder()
                 .time(time)
                 .text(news.getText())
                 .title(news.getTitle())
+                .author(authentication.getName())
                 .build();
     }
 }
