@@ -44,4 +44,10 @@ public class ControllerExceptionHandler {
         return new ResponseError("VALIDATION ERROR", ex.toString());
     }
 
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseError handleAccessDeniedException(org.springframework.security.access.AccessDeniedException ex) {
+        return new ResponseError("FORBIDDEN", ex.toString());
+    }
+
 }

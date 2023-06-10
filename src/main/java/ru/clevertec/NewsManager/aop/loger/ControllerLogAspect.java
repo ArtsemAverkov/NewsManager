@@ -16,11 +16,11 @@ import java.util.Optional;
 public class ControllerLogAspect extends BaseAspect{
 
 
-    @Pointcut("execution(* ru.clevertec.NewsManager.controller..*(..))")
+    @Pointcut("@annotation(ru.clevertec.NewsManager.aop.loger.IncludeLog)")
     public void before(){
 
     }
-    @Pointcut("execution(* ru.clevertec.NewsManager.controller..*(..))")
+    @Pointcut("@annotation(ru.clevertec.NewsManager.aop.loger.IncludeLog)")
     public void after(){
 
     }

@@ -4,7 +4,9 @@ spring:
   profiles:
     active: prod
   config:
-    import: optional:configserver:http://localhost:8080
+    import: optional:configserver:http://localhost:8085
 server:
   port: 8088
+
+
 

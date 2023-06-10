@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import ru.clevertec.NewsManager.aop.loger.IncludeLog;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
 import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
 import ru.clevertec.NewsManager.entity.News;
@@ -57,8 +56,9 @@ public class NewsController {
          newsService.delete(id);
     }
 
+    @IncludeLog
     @GetMapping
-    public List<NewsResponseDto> readAll(@PageableDefault Pageable pageable){
+    public List<News> readAll(@PageableDefault Pageable pageable){
         return newsService.readAll(pageable);
     }
 }
