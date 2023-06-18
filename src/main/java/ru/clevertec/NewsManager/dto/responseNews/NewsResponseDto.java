@@ -1,4 +1,4 @@
-package ru.clevertec.NewsManager.dto.response;
+package ru.clevertec.NewsManager.dto.responseNews;
 
 import lombok.*;
 
@@ -6,10 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Setter
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
-@NoArgsConstructor
 
 public class NewsResponseDto {
     private LocalDateTime time;

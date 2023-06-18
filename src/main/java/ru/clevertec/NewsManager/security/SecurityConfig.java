@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.clevertec.NewsManager.dto.response.User;
+import ru.clevertec.NewsManager.dto.user.User;
 import ru.clevertec.NewsManager.repository.UserManagementClient;
 
 import java.util.Objects;

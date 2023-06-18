@@ -13,7 +13,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtTokenGenerator {
 
-    private static final String SECRET_KEY = "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";
+    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
+    private static String SECRET_KEY;// = "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";
     private static final long EXPIRATION_TIME = 86400000;
     private static final String role = "SUBSCRIBER";
 

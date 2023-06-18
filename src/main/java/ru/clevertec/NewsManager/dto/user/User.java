@@ -1,4 +1,4 @@
-package ru.clevertec.NewsManager.dto.response;
+package ru.clevertec.NewsManager.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;

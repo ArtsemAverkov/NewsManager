@@ -7,18 +7,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.clevertec.NewsManager.aop.cache.Cacheable;
+import ru.clevertec.NewsManager.builder.NewsBuilder;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.response.CommentResponseDto;
-import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
-import ru.clevertec.NewsManager.entity.Comment;
+import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.NewsRepository;
 
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +27,7 @@ public class NewsApiService implements NewsService {
     @Cacheable("myCache")
     @Override
     public long create(NewsRequestDto news) {
-        News buildCreateNews = buildCreateNews(news);
+        News buildCreateNews = NewsBuilder.buildCreateNews(news);
         return newsRepository.save(buildCreateNews).getId();
     }
 
@@ -44,11 +41,14 @@ public class NewsApiService implements NewsService {
     @Override
     public NewsResponseDto readNewsWithComments(Long id){
         read(id);
-        return buildResponse(newsRepository.findNewsWithComments(id));
+        return NewsBuilder.buildNewsResponse(newsRepository.findNewsWithComments(id));
     }
 
-    public List<News> searchNews(String query, LocalDate date) {
-            return newsRepository.searchNews(query, date);
+    public List<NewsResponseDto> searchNews(String query, LocalDateTime date) {
+        if (Objects.nonNull(query)){
+            return NewsBuilder.buildNewsResponseList(newsRepository.searchNewsByQuery(query));
+        }
+            return NewsBuilder.buildNewsResponseList(newsRepository.searchNewsByDate(date));
     }
 
 
@@ -60,7 +60,7 @@ public class NewsApiService implements NewsService {
         if (readNews.getAuthor().equals(authentication.getName())) {
             readNews.setId(id);
             LocalDateTime timeCreateNews = readNews.getTime();
-            News buildUpdateNews = buildUpdateNews(news, timeCreateNews);
+            News buildUpdateNews = NewsBuilder.buildUpdateNews(news, timeCreateNews);
             newsRepository.save(buildUpdateNews);
         } else {
             throw new AccessDeniedException(
@@ -79,70 +79,10 @@ public class NewsApiService implements NewsService {
             throw new AccessDeniedException(
                     "You do not have rights to delete the news because you are not the author of this news");
         }
-
     }
 
     @Override
-    public List<News> readAll(Pageable pageable) {
-        return newsRepository.findAll(pageable).getContent();
-    }
-
-    public  List<NewsResponseDto> buildResponseList (List<News> news){
-        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
-        for (News response :news) {
-            NewsResponseDto build = NewsResponseDto.builder()
-                    .time(response.getTime())
-                    .text(response.getText())
-                    .title(response.getTitle())
-                    .author(response.getAuthor())
-                    .comments(convertComment(response.getComment()))
-                    .build();
-        newsResponseDtoList.add(build);
-        }
-        return newsResponseDtoList;
-    }
-
-    public NewsResponseDto buildResponse (News news){
-        return NewsResponseDto.builder()
-                .time(news.getTime())
-                .text(news.getText())
-                .title(news.getTitle())
-                .author(news.getAuthor())
-                .comments(convertComment(news.getComment()))
-                .build();
-    }
-
-    public List<CommentResponseDto> convertComment(List<Comment> comments){
-        List<CommentResponseDto> commentResponseDto = new ArrayList<>();
-        for (Comment comment : comments){
-            CommentResponseDto build = CommentResponseDto.builder()
-                    .time(comment.getTime())
-                    .text(comment.getText())
-                    .username(comment.getUsername())
-                    .build();
-            commentResponseDto.add(build);
-        }
-        return commentResponseDto;
-    }
-
-    private News buildCreateNews(NewsRequestDto news){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LocalDateTime now = LocalDateTime.now();
-        return News.builder()
-                .time(now)
-                .title(news.getTitle())
-                .text(news.getText())
-                .author(authentication.getName())
-                .build();
-    }
-
-    private News buildUpdateNews(NewsRequestDto news, LocalDateTime time){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return News.builder()
-                .time(time)
-                .text(news.getText())
-                .title(news.getTitle())
-                .author(authentication.getName())
-                .build();
+    public List<NewsResponseDto> readAll(Pageable pageable) {
+        return NewsBuilder.buildNewsResponseList(newsRepository.findAll(pageable).getContent());
     }
 }

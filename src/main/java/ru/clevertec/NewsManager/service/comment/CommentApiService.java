@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.clevertec.NewsManager.aop.cache.Cacheable;
+import ru.clevertec.NewsManager.builder.CommentBuilder;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
@@ -14,9 +15,9 @@ import ru.clevertec.NewsManager.repository.CommentRepository;
 import ru.clevertec.NewsManager.service.news.NewsService;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class CommentApiService implements CommentService{
     @Override
     public long create(CommentRequestDto comment) {
         News news = newsService.read(comment.getNewsId());
-        Comment builderComment = builderCreateComment(comment);
+        Comment builderComment = CommentBuilder.buildCreateComment(comment);
         builderComment.setNews(news);
         return commentRepository.save(builderComment).getId();
     }
@@ -49,7 +50,7 @@ public class CommentApiService implements CommentService{
         if (readComment.getUsername().equals(authentication.getName())) {
             LocalDateTime time = readComment.getTime();
             readComment.setId(id);
-            Comment builderUpdateComment = builderUpdateComment(comment, time);
+            Comment builderUpdateComment = CommentBuilder.buildUpdateComment(comment, time);
             commentRepository.save(builderUpdateComment);
         } else {
             throw new AccessDeniedException(
@@ -76,25 +77,10 @@ public class CommentApiService implements CommentService{
     }
 
     @Override
-    public List<Comment> searchComments(String query, LocalDate date) {
-        return commentRepository.searchComments(query, date);
-    }
-
-    private Comment builderCreateComment(CommentRequestDto commentRequestDto){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return Comment.builder()
-                .time(LocalDateTime.now())
-                .text(commentRequestDto.getText())
-                .username(authentication.getName())
-                .build();
-    }
-
-    private Comment builderUpdateComment(CommentRequestDto commentRequestDto, LocalDateTime data){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return Comment.builder()
-                .time(data)
-                .text(commentRequestDto.getText())
-                .username(authentication.getName())
-                .build();
+    public List<Comment> searchComments(String query, LocalDateTime date) {
+        if(Objects.nonNull(query)){
+            return commentRepository.searchCommentsByQuery(query);
+        }
+        return commentRepository.searchCommentsByDate(date);
     }
 }

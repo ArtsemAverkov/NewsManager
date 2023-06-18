@@ -1,14 +1,13 @@
-package ru.clevertec.NewsManager.dto.response;
+package ru.clevertec.NewsManager.dto.responseNews;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
-@NoArgsConstructor
 public class CommentResponseDto {
     private LocalDateTime time;
     private String text;
