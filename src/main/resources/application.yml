@@ -1,12 +1,12 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/artemaverkov
-    username: artemaverkov
-    password: root
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+  application:
+    name: news-api
+  profiles:
+    active: prod
+  config:
+    import: optional:configserver:http://localhost:8086
+server:
+  port: 8088
+
+
+

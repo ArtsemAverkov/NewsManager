@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="insertData" author="ArtsemAverkov">
+        <insert tableName="news">
+            <column name="time" value="2023-05-26"/>
+            <column name="title" value="Sample News Title"/>
+            <column name="text" value="Sample News Text"/>
+            <column name="author" type="Author"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertCommentData" author="ArtsemAverkov">
+        <insert tableName="comment">
+            <column name="time" value="2023-05-26"/>
+            <column name="text" value="Sample Comment Text"/>
+            <column name="username" value="Sample User"/>
+            <column name="news_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
