@@ -17,6 +17,11 @@ import java.util.Objects;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ The SecurityConfig class provides the security configuration for the NewsManager application.
+ It defines the authentication provider, user details service, password encoder, and security filter chain.
+ */
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -24,6 +29,13 @@ public class SecurityConfig {
 
     private final UserManagementClient userManagementClient;
     private final JwtTokenGenerator jwtTokenGenerator;
+
+    /**
+     Configures the security filter chain for handling HTTP security.
+     @param http the HttpSecurity object to configure
+     @return the configured security filter chain
+     @throws Exception if an error occurs during configuration
+     */
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -60,6 +72,11 @@ public class SecurityConfig {
                return  http.build();
     }
 
+    /**
+     Creates and returns the UserDetailsService bean.
+     @return the UserDetailsService bean
+     */
+
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
@@ -83,6 +100,11 @@ public class SecurityConfig {
             }
         };
     }
+
+    /**
+     Creates and returns the PasswordEncoder bean.
+     @return the PasswordEncoder bean
+     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {

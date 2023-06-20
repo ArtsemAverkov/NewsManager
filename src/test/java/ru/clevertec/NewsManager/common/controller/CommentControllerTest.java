@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.clevertec.NewsManager.NewsManagerApplication;
+
 import ru.clevertec.NewsManager.common.WireMockInitializer;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsRequestDto;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverNewsRequestDto;
@@ -44,6 +44,9 @@ import static ru.clevertec.NewsManager.common.utill.CommentBuilder.builderCommen
 import static ru.clevertec.NewsManager.common.utill.CommentBuilder.createUserDetails;
 import static ru.clevertec.NewsManager.common.utill.CommentBuilder.getContent;
 
+/**
+ * Class for testing the CommentController.
+ */
 @ContextConfiguration(classes = NewsManagerApplication.class)
 @WebMvcTest({CommentController.class, SecurityConfig.class, JwtTokenGenerator.class})
 @ExtendWith({ValidParameterResolverNewsRequestDto.class, ValidParameterResolverCommentsRequestDto.class})
@@ -58,6 +61,10 @@ public class CommentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * Method executed before running all the tests.
+     */
+
     @BeforeAll
     static void setup() {
         WireMockInitializer.setup();
@@ -67,6 +74,12 @@ public class CommentControllerTest {
     static void teardown() {
         WireMockInitializer.teardown();
     }
+
+    /**
+     * Test for creating a comment.
+     * @param commentRequestDto the comment request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void create(CommentRequestDto commentRequestDto) throws Exception {
@@ -81,6 +94,11 @@ public class CommentControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     * Test for updating a comment.
+     * @param commentRequestDto the comment request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
     @Test
     public void update(CommentRequestDto commentRequestDto) throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.patch("/comment/{id}", RequestId.VALUE_1.getValue())
@@ -92,6 +110,12 @@ public class CommentControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+
+    /**
+     * Test for deleting a comment.
+     * @throws Exception if an exception occurs during the test
+     */
+
     @Test
     public void delete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/comment/{id}", RequestId.VALUE_1.getValue())
@@ -100,6 +124,12 @@ public class CommentControllerTest {
         verify(commentService).delete(RequestId.VALUE_1.getValue());
         SecurityContextHolder.clearContext();
     }
+
+    /**
+     * Test for reading a comment.
+     * @param commentRequestDto the comment request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void read(CommentRequestDto commentRequestDto) throws Exception {
@@ -114,6 +144,12 @@ public class CommentControllerTest {
         verify(commentService).read(RequestId.VALUE_1.getValue());
         SecurityContextHolder.clearContext();
     }
+
+    /**
+     * Test for searching comments.
+     * @param commentRequestDto the comment request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void searchComments(CommentRequestDto commentRequestDto) throws Exception {
@@ -134,6 +170,12 @@ public class CommentControllerTest {
         verify(commentService).searchComments(query, now);
         SecurityContextHolder.clearContext();
     }
+
+    /**
+     * Test for reading all comments.
+     * @param commentRequestDto the comment request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void readAll(CommentRequestDto commentRequestDto) throws Exception {

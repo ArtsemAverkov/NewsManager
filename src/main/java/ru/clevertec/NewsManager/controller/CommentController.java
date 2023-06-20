@@ -22,6 +22,10 @@ import ru.clevertec.NewsManager.service.comment.CommentService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ This class serves as a controller for Comment-related operations.
+ */
+
 @RestController
 @RequestMapping(value = "/comment")
 @RequiredArgsConstructor
@@ -29,6 +33,11 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    /**
+     * Creates a new comment.
+     * @param comment the CommentRequestDto containing the comment details
+     * @return the ID of the created comment
+     */
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,11 +45,24 @@ public class CommentController {
         return commentService.create(comment);
     }
 
+    /**
+     * Retrieves a comment by its ID.
+     * @param id the ID of the comment
+     * @return the Comment object
+     */
+
     @GetMapping(value= "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Comment read(@PathVariable  @Valid Long id) {
         return commentService.read(id);
     }
+
+
+    /**
+     * Updates a comment.
+     * @param id      the ID of the comment to update
+     * @param comment the CommentRequestDto containing the updated comment details
+     */
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -48,11 +70,23 @@ public class CommentController {
         commentService.update(comment, id);
     }
 
+    /**
+     * Deletes a comment by its ID.
+     * @param id the ID of the comment to delete
+     */
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable @Valid Long id){
          commentService.delete(id);
     }
+
+    /**
+     * Searches for comments based on the provided query and date.
+     * @param query the search query
+     * @param date  the date to filter the comments
+     * @return the list of matching comments
+     */
 
     @GetMapping(value = "/search")
     @ResponseStatus(HttpStatus.OK)
@@ -60,6 +94,12 @@ public class CommentController {
                                  @RequestParam(required = false) LocalDateTime date) {
         return commentService.searchComments(query, date);
     }
+
+    /**
+     * Retrieves all comments with pagination support.
+     * @param pageable the Pageable object for pagination
+     * @return the list of comments
+     */
 
     @GetMapping
     public List<Comment> readAll(@PageableDefault Pageable pageable){

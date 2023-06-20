@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.0'
 	id 'io.spring.dependency-management' version '1.1.0'
-	id 'org.asciidoctor.convert' version '1.5.11'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group = 'ru.clevertec'
@@ -55,12 +55,26 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-task copyResources(type: Copy) {
-	from "${buildDir}/generated-docs"
-	into "${buildDir}/resources/main/static/docs"
+asciidoctor {
+	sourceDir file('src/docs/asciidoc')
+	attributes 'doctype': 'book',
+			'toc': 'left',
+			'toclevels': '3',
+			'numbered': '',
+			'sectlinks': '',
+			'sectanchors': '',
+			'source-highlighter': 'coderay',
+			'icons': 'font'
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+build {
+	dependsOn asciidoctor
+}
+
+bootJar {
+	requiresUnpack '**/asciidoctorj-*.jar'
 }

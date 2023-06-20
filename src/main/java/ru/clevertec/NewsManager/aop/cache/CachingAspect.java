@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+
+ This class represents a caching aspect that provides caching functionality for methods annotated with @Cacheable.
+ It uses a CacheFactory to create and manage different types of caches.
+ */
 
 @Slf4j
 @Aspect
@@ -22,6 +27,14 @@ public class CachingAspect  {
 
     private final CacheFactory cacheFactory;
 
+    /**
+     * Intercepts the execution of methods annotated with @Cacheable and applies caching logic.
+     *
+     * @param joinPoint  the join point for the intercepted method
+     * @param cacheable  the @Cacheable annotation applied to the method
+     * @return the cached value or the result of the method invocation
+     * @throws Throwable if an exception occurs during method execution
+     */
 
     @Around("@annotation(cacheable)")
     public Object cache(ProceedingJoinPoint joinPoint, Cacheable cacheable) throws Throwable {
@@ -60,7 +73,7 @@ public class CachingAspect  {
                     Object cachedValue2 = cache.get(String.valueOf(args));
                     if (cachedValue2 != null) {
                         Object result = joinPoint.proceed();
-                        cache.update(String.valueOf(args), Arrays.stream(joinPoint.getArgs()).findFirst().get());
+                        cache.update(String.valueOf(args), Arrays.stream(joinPoint.getArgs()).skip(1).findFirst().get());
                         return result;
                     }
                 }
@@ -70,7 +83,19 @@ public class CachingAspect  {
         return null;
     }
 
+    /**
+     * Generates a cache key based on the first argument of the intercepted method.
+     *
+     * @param joinPoint the join point for the intercepted method
+     * @return the generated cache key
+     */
+
     private String generateCacheKey(ProceedingJoinPoint joinPoint) {
-        return Arrays.stream(joinPoint.getArgs()).findFirst().get().toString();
+        Object[] args = joinPoint.getArgs();
+        if (args != null && args.length > 0) {
+            return Arrays.stream(args).findFirst().get().toString();
+        } else {
+            throw new IllegalArgumentException("Invalid cache key: args is null or empty");
+        }
     }
 }

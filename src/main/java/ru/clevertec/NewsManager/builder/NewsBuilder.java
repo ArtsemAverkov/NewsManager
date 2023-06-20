@@ -12,7 +12,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ This class provides static methods to build News and DTO objects.
+ */
+
 public class NewsBuilder {
+
+    /**
+     * Builds a list of NewsResponseDto objects from a list of News entities.
+     * @param newsList the list of News entities
+     * @return the list of NewsResponseDto objects
+     */
 
     public static List<NewsResponseDto> buildNewsResponseList(List<News> newsList) {
     List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
@@ -21,7 +31,13 @@ public class NewsBuilder {
         newsResponseDtoList.add(newsResponseDto);
     }
     return newsResponseDtoList;
-}
+    }
+
+    /**
+     * Builds a NewsResponseDto object from a News entity.
+     * @param news the News entity
+     * @return the NewsResponseDto object
+     */
 
     public static NewsResponseDto buildNewsResponse(News news) {
         List<CommentResponseDto> commentResponseDtoList = convertComment(news.getComment());
@@ -35,6 +51,12 @@ public class NewsBuilder {
                 .build();
     }
 
+    /**
+     * Converts a list of Comment entities to a list of CommentResponseDto objects.
+     * @param comments the list of Comment entities
+     * @return the list of CommentResponseDto objects
+     */
+
     public static List<CommentResponseDto> convertComment(List<Comment> comments) {
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
         for (Comment comment : comments) {
@@ -44,6 +66,12 @@ public class NewsBuilder {
         return commentResponseDtoList;
     }
 
+    /**
+     * Builds a CommentResponseDto object from a Comment entity.
+     * @param comment the Comment entity
+     * @return the CommentResponseDto object
+     */
+
     public static CommentResponseDto buildCommentResponse(Comment comment) {
         return CommentResponseDto.builder()
                 .time(comment.getTime())
@@ -51,6 +79,12 @@ public class NewsBuilder {
                 .username(comment.getUsername())
                 .build();
     }
+
+    /**
+     * Builds a new News object for creating a news.
+     * @param newsRequestDto the NewsRequestDto containing the news details
+     * @return the built News object
+     */
 
     public static News buildCreateNews(NewsRequestDto newsRequestDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -62,6 +96,13 @@ public class NewsBuilder {
                 .author(authentication.getName())
                 .build();
     }
+
+    /**
+     * Builds a new News object for updating a news.
+     * @param newsRequestDto the NewsRequestDto containing the updated news details
+     * @param time           the LocalDateTime representing the updated time of the news
+     * @return the built News object
+     */
 
     public static News buildUpdateNews(NewsRequestDto newsRequestDto, LocalDateTime time) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

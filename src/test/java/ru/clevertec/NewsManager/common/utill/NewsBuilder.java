@@ -12,8 +12,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides utility methods for building News objects and converting response DTOs.
+ */
 public class NewsBuilder {
 
+    /**
+     * Builds a list of NewsResponseDto objects based on the provided list of News entities.
+     * @param news the list of News entities
+     * @return the list of NewsResponseDto objects
+     */
     public static List<NewsResponseDto> buildResponseList (List<News> news){
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
         for (News response :news) {
@@ -29,6 +37,11 @@ public class NewsBuilder {
         return newsResponseDtoList;
     }
 
+    /**
+     * Builds a NewsResponseDto object based on the provided News entity.
+     * @param news the News entity
+     * @return the NewsResponseDto object
+     */
     public static NewsResponseDto buildResponse (News news){
         return NewsResponseDto.builder()
                 .time(news.getTime())
@@ -39,6 +52,11 @@ public class NewsBuilder {
                 .build();
     }
 
+    /**
+     * Converts a list of Comment entities to a list of CommentResponseDto objects.
+     * @param comments the list of Comment entities
+     * @return the list of CommentResponseDto objects
+     */
     public static List<CommentResponseDto> convertComment(List<Comment> comments){
         List<CommentResponseDto> commentResponseDto = new ArrayList<>();
         for (Comment comment : comments){
@@ -52,6 +70,11 @@ public class NewsBuilder {
         return commentResponseDto;
     }
 
+    /**
+     * Builds a News entity based on the provided NewsRequestDto.
+     * @param news the NewsRequestDto containing the news details
+     * @return the built News entity
+     */
     public static News buildCreateNews(NewsRequestDto news){
         LocalDateTime now = LocalDateTime.now();
         return News.builder()
@@ -62,6 +85,12 @@ public class NewsBuilder {
                 .author(RequestName.USERNAME.getValue())
                 .build();
     }
+
+    /**
+     * Gets a list of Comment entities based on the provided CommentRequestDto.
+     * @param commentRequestDto the CommentRequestDto
+     * @return the list of Comment entities
+     */
     @NotNull
     public static List<Comment> getComments(CommentRequestDto commentRequestDto) {
         Comment comment = new Comment();
@@ -73,6 +102,12 @@ public class NewsBuilder {
         return commentList;
     }
 
+    /**
+     * Gets a News entity based on the provided NewsRequestDto and CommentRequestDto.
+     * @param news              the NewsRequestDto containing the news details
+     * @param commentRequestDto the CommentRequestDto
+     * @return the News entity
+     */
     @NotNull
     public static News getNews(NewsRequestDto news, CommentRequestDto commentRequestDto) {
         List<Comment> commentList = getComments(commentRequestDto);

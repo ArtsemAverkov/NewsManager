@@ -17,7 +17,7 @@
         "spring.datasource.driver-class-name": "org.postgresql.Driver",
         "spring.jpa.database": "postgresql",
         "spring.jpa.database-platform": "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto": "update",
+        "spring.jpa.hibernate.ddl-auto": "create",
         "spring.jpa.show-sql": true,
         "spring.liquibase.enabled": true,
         "spring.liquibase.change-log": "classpath:db/changelog/changelog.xml",

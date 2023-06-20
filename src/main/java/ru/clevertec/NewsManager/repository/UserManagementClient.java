@@ -11,6 +11,11 @@ import ru.clevertec.NewsManager.dto.user.User;
 @FeignClient(value = "userManager", url = "http://localhost:8084/users")
 public interface UserManagementClient {
 
+    /**
+     The UserManagementClient interface is a Feign client that communicates with the
+     User Management service to perform user-related operations.
+     */
+
     @GetMapping(value = "/authenticate/{token}")
     User authenticateUser(@PathVariable String token);
 }

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ The JwtTokenGenerator class is responsible for generating JWT (JSON Web Token) tokens for authentication.
+ It uses a secret key and sets the expiration time and user role in the token.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtTokenGenerator {
@@ -17,6 +21,12 @@ public class JwtTokenGenerator {
     private static String SECRET_KEY;// = "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";
     private static final long EXPIRATION_TIME = 86400000;
     private static final String role = "SUBSCRIBER";
+
+    /**
+     Generates a JWT token for the given username.
+     @param username the username for which the token is generated
+     @return the generated JWT token
+     */
 
     public String generateToken(String username) {
         Date now = new Date();

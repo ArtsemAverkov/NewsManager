@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,6 +26,7 @@ import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsR
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverNewsRequestDto;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverNewsResponseDto;
 import ru.clevertec.NewsManager.common.utill.RequestId;
+import ru.clevertec.NewsManager.common.utill.RequestName;
 import ru.clevertec.NewsManager.controller.NewsController;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
 import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
@@ -69,6 +69,12 @@ public class NewsControllerTest {
         WireMockInitializer.teardown();
     }
 
+    /**
+     * Test for creating a news.
+     * @param newsRequestDto the news request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
+
     @Test
     public void create(NewsRequestDto newsRequestDto) throws Exception {
         when(newsServiceService.create(any(NewsRequestDto.class))).thenReturn(RequestId.VALUE_1.getValue());
@@ -82,7 +88,11 @@ public class NewsControllerTest {
         SecurityContextHolder.clearContext();
     }
 
-
+    /**
+     * Test for updating a news.
+     * @param newsRequestDto the news request DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void update(NewsRequestDto newsRequestDto) throws Exception {
@@ -95,6 +105,10 @@ public class NewsControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     * Test for deleting a news.
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void delete() throws Exception {
@@ -105,6 +119,11 @@ public class NewsControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     * Test for reading a news with comments.
+     * @param newsResponseDto the news response DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void readWithComments(NewsResponseDto newsResponseDto) throws Exception {
@@ -120,26 +139,37 @@ public class NewsControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     * Test for searching news.
+     * @param newsResponseDto the news response DTO object
+     * @throws Exception if an exception occurs during the test
+     */
+
     @Test
     public void searchNews(NewsResponseDto newsResponseDto) throws Exception {
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
         newsResponseDtoList.add(newsResponseDto);
 
-        String query = "name";
         LocalDateTime now = LocalDateTime.now();
-        when(newsServiceService.searchNews(query, now)).thenReturn(newsResponseDtoList);
+        when(newsServiceService.searchNews(RequestName.NAME.getValue(), now)).thenReturn(newsResponseDtoList);
         mockMvc.perform(MockMvcRequestBuilders.get("/news/search")
                         .with(user(createUserDetails()))
-                .param("query", (query))
+                .param("query", (RequestName.NAME.getValue()))
                 .param("date", String.valueOf(now)))
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0]text", Matchers.is(newsResponseDto.getText())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0]title", Matchers.is(newsResponseDto.getTitle())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0]author", Matchers.is(newsResponseDto.getAuthor())));
-        verify(newsServiceService).searchNews(query, now);
+        verify(newsServiceService).searchNews(RequestName.NAME.getValue(), now);
         SecurityContextHolder.clearContext();
     }
+
+    /**
+     * Test for reading all news.
+     * @param newsResponseDto the news response DTO object
+     * @throws Exception if an exception occurs during the test
+     */
 
     @Test
     public void readAll(NewsResponseDto newsResponseDto) throws Exception {
@@ -158,6 +188,12 @@ public class NewsControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     * Returns the JSON content for the given news request DTO.
+     * @param newsRequestDto the news request DTO object
+     * @return the JSON content as a string
+     */
+
     @NotNull
     private String getContent(NewsRequestDto newsRequestDto) {
         return "{\n" +
@@ -165,6 +201,11 @@ public class NewsControllerTest {
                 "  \"text\": \"" + newsRequestDto.getText() + "\"\n" +
                 "}";
     }
+
+    /**
+     * Creates and returns a user details object for testing.
+     * @return the user details object
+     */
 
     private UserDetails createUserDetails(){
         return User.withUsername("username")

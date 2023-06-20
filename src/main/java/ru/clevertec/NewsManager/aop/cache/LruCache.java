@@ -2,11 +2,22 @@ package ru.clevertec.NewsManager.aop.cache;
 
 import java.util.*;
 
+/**
+ This class represents a Least Recently Used (LRU) cache implementation.
+ It stores key-value pairs and evicts the least recently used item when the cache is full.
+ @param <K> the type of the cache key
+ @param <V> the type of the cache value
+ */
 
 public class LruCache<K, V> implements CacheI<K,V> {
     private final int maxSize;
     private final Map<K, V> cache;
     private final Queue<K> lruQueue;
+
+    /**
+     Constructs an LRU cache with the specified maximum size.
+     @param maxSize the maximum size of the cache
+     */
 
     public LruCache(int maxSize) {
         this.maxSize = maxSize;

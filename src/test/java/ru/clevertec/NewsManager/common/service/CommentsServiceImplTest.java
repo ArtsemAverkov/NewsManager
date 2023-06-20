@@ -8,8 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,11 +34,19 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
+/**
+ * This class contains unit tests for the {@link CommentApiService} class in the package ru.clevertec.NewsManager.common.service.
+ */
 @DisplayName("Comments Service Test")
 public class CommentsServiceImplTest {
+
+    /**
+     * Test cases for valid data.
+     */
     @Nested
     @ExtendWith({MockitoExtension.class, ValidParameterResolverCommentsRequestDto.class})
     public class ValidData {
@@ -50,6 +60,9 @@ public class CommentsServiceImplTest {
         @Mock
         private CommentRepository commentRepository;
 
+        /**
+         * Sets up the authentication before each test.
+         */
         @BeforeEach
         void setUp() {
             Authentication authentication =
@@ -57,7 +70,10 @@ public class CommentsServiceImplTest {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-
+        /**
+         * Test case for reading comments when the comments are valid.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void shouldReadCommentsWhenCommentsValid(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -66,6 +82,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).findById(RequestId.VALUE_1.getValue());
         }
 
+        /**
+         * Test case for creating comments when the comments are valid.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void shouldCreateCommentsWhenCommentsIsValid(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -75,6 +95,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).save(any(Comment.class));
         }
 
+        /**
+         * Test case for searching comments when the search query parameter is provided.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void shouldSearchCommentsWhenSearchCommentsHasParameterQuery(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -87,6 +111,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).searchCommentsByQuery(RequestName.NAME.getValue());
         }
 
+        /**
+         * Test case for searching comments when the search date parameter is provided.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void shouldSearchCommentsWhenSearchCommentsHasParameterData(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -100,6 +128,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).searchCommentsByDate(now);
         }
 
+        /**
+         * Test case for reading all comments.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void shouldReadAllWhenCommentsIsValid(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -112,6 +144,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).findAll(Pageable.ofSize(10).withPage(0));
         }
 
+        /**
+         * Test case for updating a comment with a valid author name.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void testUpdateWithValidAuthorName(CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -122,6 +158,10 @@ public class CommentsServiceImplTest {
             verify(commentRepository, times(1)).save(any(Comment.class));
         }
 
+        /**
+         * Test case for updating a comment with an invalid author name.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void testUpdateWithInvalidAuthorName(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
@@ -130,6 +170,10 @@ public class CommentsServiceImplTest {
             assertThrows(AccessDeniedException.class, () -> commentApiService.update(commentRequestDto,  RequestId.VALUE_1.getValue()));
         }
 
+        /**
+         * Test case for deleting a comment with a valid author name.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void testDeleteWithValidAuthorName(CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -141,15 +185,23 @@ public class CommentsServiceImplTest {
 
         }
 
+        /**
+         * Test case for deleting a comment with an invalid author name.
+         * @param commentRequestDto the comment request DTO
+         */
         @Test
         void testDeleteWithInvalidAuthorName(CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
-            builderCreateComment.setUsername("admin");
+            builderCreateComment.setUsername(RequestName.ADMIN.getValue());
             when(commentRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.of( builderCreateComment));
             assertThrows(AccessDeniedException.class, () -> commentApiService.delete(RequestId.VALUE_1.getValue()));
         }
 
-
+        /**
+         * Helper method to build a Comment object for testing.
+         * @param commentRequestDto the comment request DTO
+         * @return the created Comment object
+         */
         private Comment builderCreateComment(CommentRequestDto commentRequestDto){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             LocalDateTime now = LocalDateTime.now().withNano(0);
@@ -173,6 +225,9 @@ public class CommentsServiceImplTest {
         @Mock
         private CommentRepository commentRepository;
 
+        /**
+         * Test case for reading comments when the comment ID is invalid.
+         */
         @Test
         void shouldGetGiftCertificatesWheGiftCertificatesIsInvalid() {
             when(commentRepository.findById(1L)) .thenReturn(Optional.ofNullable(null));

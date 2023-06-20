@@ -4,12 +4,24 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
+/**
+ This class represents a Least Frequently Used (LFU) cache implementation.
+ It stores key-value pairs and evicts the least frequently used item when the cache is full.
+ @param <K> the type of the cache key
+ @param <V> the type of the cache value
+ */
+
 @Slf4j
 public class LfuCache<K, V> implements CacheI<K,V>{
     private  int maxSize;
     private  Map<K, V> cache;
     private  Map<K, Integer> frequencies;
     private  Queue<K> lfuQueue;
+
+    /**
+     Constructs an LFU cache with the specified maximum size.
+     @param maxSize the maximum size of the cache
+     */
 
     public LfuCache(int maxSize) {
         this.maxSize = maxSize;
