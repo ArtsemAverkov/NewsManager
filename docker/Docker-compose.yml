@@ -1,0 +1,103 @@
+#version: '3.8'
+#
+#services:
+#  postgres:
+#    build:
+#      context: services/postgres
+#      dockerfile: Dockerfile
+#    environment:
+#      - POSTGRES_USER=artemaverkov
+#      - POSTGRES_DB=root
+#      - POSTGRES_PASSWORD=root
+#    ports:
+#      - 5432:5432
+#
+#  settingApiManager:
+#    build:
+#      context: services/settingApiManager
+#      dockerfile: Dockerfile
+#    image: 'application1:setting'
+#    ports:
+#      - 8086:8086
+#
+#  userManager:
+#    build:
+#      context: services/userManager
+#      dockerfile: Dockerfile
+#    image: 'application1:user'
+#    environment:
+#      - SETTING_API_HOST=http://host.docker.internal:8086
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/artemaverkov
+#    depends_on:
+#      - postgres
+#      - settingApiManager
+#    network_mode: "host"
+#
+#  newsManager:
+#    build:
+#      context: services/newsManager
+#      dockerfile: Dockerfile
+#    image: 'application1:news'
+#    environment:
+#      - SETTING_API_HOST=http://host.docker.internal:8086
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/artemaverkov
+#    depends_on:
+#      - postgres
+#      - settingApiManager
+#      - userManager
+#    network_mode: "host"
+
+
+version: '3.8'
+services:
+  postgres:
+    build:
+      context: services/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=artemaverkov
+      - POSTGRES_DB=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5433:5432
+
+  settingApiManager:
+    build:
+      context: services/settingApiManager
+      dockerfile: Dockerfile
+    image: 'applicatio:setting'
+    ports:
+      - 8086:8086
+
+  userManager:
+    build:
+      context: services/userManager
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_APPLICATION_NAME=user-api
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/root
+    image: 'applicatio:user'
+    ports:
+      - 8085:8084
+    depends_on:
+      - postgres
+      - settingApiManager
+
+  newsManager:
+    build:
+      context: services/newsManager
+      dockerfile: Dockerfile
+    image: 'applicatio:news'
+    environment:
+      - SPRING_APPLICATION_NAME=news-api
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://settingapimanager:8086
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/root
+    ports:
+      - 8089:8088
+    depends_on:
+      - postgres
+      - settingApiManager
+      - userManager
+
