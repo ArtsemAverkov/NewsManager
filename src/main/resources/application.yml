@@ -1,3 +1,6 @@
+server:
+  port: 8088
+USER_MANAGER_URL: http://localhost:8084/users
 spring:
   application:
     name: news-api
@@ -5,8 +8,7 @@ spring:
     active: prod
   config:
     import: optional:configserver:http://localhost:8086
-server:
-  port: 8088
+
 
 
 
