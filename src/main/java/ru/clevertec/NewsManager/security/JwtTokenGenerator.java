@@ -4,6 +4,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +18,15 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtTokenGenerator {
 
-    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
-    private static String SECRET_KEY;// = "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";
+    @Autowired
+    private static String SECRET_KEY;
     private static final long EXPIRATION_TIME = 86400000;
     private static final String role = "SUBSCRIBER";
+
+    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
+    public void setSecretKey(String secretKey) {
+        JwtTokenGenerator.SECRET_KEY = secretKey;
+    }
 
     /**
      Generates a JWT token for the given username.

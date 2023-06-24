@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.clevertec.NewsManager.dto.user.User;
-
+//@FeignClient(value = "userManager", url = "http://localhost:8084/users")
 
 @Component
-@FeignClient(value = "userManager", url = "http://localhost:8084/users")
+@FeignClient(value = "userManager", url = "${USER_MANAGER_URL}")
 public interface UserManagementClient {
 
     /**

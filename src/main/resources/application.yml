@@ -1,5 +1,6 @@
 server:
   port: 8088
+USER_MANAGER_URL: http://localhost:8084/users
 spring:
   application:
     name: news-api

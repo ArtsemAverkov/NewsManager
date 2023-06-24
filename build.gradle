@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'ru.clevertec'
-version = '0.0.3-SNAPSHOT'
+version = '0.0.5-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
