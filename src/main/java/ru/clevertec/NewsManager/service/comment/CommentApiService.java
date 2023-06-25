@@ -1,19 +1,23 @@
 package ru.clevertec.NewsManager.service.comment;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.clevertec.NewsManager.aop.cache.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.NewsManager.builder.CommentBuilder;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.CommentRepository;
 import ru.clevertec.NewsManager.service.news.NewsService;
-
+import ru.clevertec.NewsManager.utill.CacheConstants;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +30,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "commentCa")
 public class CommentApiService implements CommentService{
 
     private final CommentRepository commentRepository;
@@ -37,7 +42,8 @@ public class CommentApiService implements CommentService{
      @return the ID of the created comment
      */
 
-    @Cacheable("myCache")
+    @CachePut(value = "comment", key = "#id")
+    @Transactional
     @Override
     public long create(CommentRequestDto comment) {
         News news = newsService.read(comment.getNewsId());
@@ -53,7 +59,7 @@ public class CommentApiService implements CommentService{
      @throws IllegalArgumentException if the comment ID is invalid
      */
 
-    @Cacheable("myCache")
+    @Cacheable(cacheNames = "comment", key = "#id", unless = "#result == null")
     @Override
     public Comment read(long id) {
         return commentRepository.findById(id).orElseThrow(() ->
@@ -67,8 +73,9 @@ public class CommentApiService implements CommentService{
      @throws AccessDeniedException if the current user is not the author of the comment
      */
 
-    @Cacheable("myCache")
+    @CachePut(value = "comment", key = "#id", condition = CacheConstants.CACHE_CONDITION)
     @Override
+    @Transactional
     public void update(CommentRequestDto comment, Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Comment readComment = read(id);
@@ -84,14 +91,14 @@ public class CommentApiService implements CommentService{
     }
 
     /**
-
      Deletes a comment with the provided ID.
      @param id the ID of the comment to delete
      @throws AccessDeniedException if the current user is not the author of the comment
      */
 
-    @Cacheable("myCache")
+    @CacheEvict(value = "comment", key = "#id", condition = CacheConstants.CACHE_CONDITION)
     @Override
+    @Transactional
     public void delete(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Comment readComment = read(id);
@@ -110,6 +117,7 @@ public class CommentApiService implements CommentService{
      @return the list of retrieved comments
      */
 
+    @Cacheable(cacheNames = "comment", condition = CacheConstants.CACHE_CONDITION)
     @Override
     public List<Comment> readAll(Pageable pageable) {
         return  commentRepository.findAll(pageable).getContent();

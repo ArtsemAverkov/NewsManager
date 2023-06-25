@@ -103,7 +103,7 @@ public class NewsController {
      */
 
     @GetMapping
-    public List<NewsResponseDto> readAll(@PageableDefault Pageable pageable){
+    public List<NewsResponseDto> readAll(@PageableDefault(page = 1, size = 10, sort = "time") Pageable pageable){
         return newsService.readAll(pageable);
     }
 }

@@ -1,17 +1,23 @@
 package ru.clevertec.NewsManager.service.news;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.clevertec.NewsManager.aop.cache.Cacheable;
+
+import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.NewsManager.builder.NewsBuilder;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
 import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.NewsRepository;
+import ru.clevertec.NewsManager.utill.CacheConstants;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +30,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "newsCash")
 public class NewsApiService implements NewsService {
 
     private final NewsRepository newsRepository;
@@ -34,7 +41,7 @@ public class NewsApiService implements NewsService {
      @return the ID of the created news
      */
 
-    @Cacheable("myCache")
+    @CachePut(value = "news", key = "#result.id", condition = CacheConstants.CACHE_CONDITION)
     @Override
     public long create(NewsRequestDto news) {
         News buildCreateNews = NewsBuilder.buildCreateNews(news);
@@ -48,7 +55,7 @@ public class NewsApiService implements NewsService {
      @throws IllegalArgumentException if the news ID is invalid
      */
 
-    @Cacheable("myCache")
+    @Cacheable(value = "news", key = "#id", unless = "#result == null", condition = CacheConstants.CACHE_CONDITION)
     @Override
     public News read(long id) {
         return newsRepository.findById(id).orElseThrow(()->
@@ -88,8 +95,9 @@ public class NewsApiService implements NewsService {
      @throws AccessDeniedException if the current user is not the author of the news
      */
 
-    @Cacheable("myCache")
+    @CachePut(value = "news", key = "#id", condition = CacheConstants.CACHE_CONDITION)
     @Override
+    @Transactional
     public void update(NewsRequestDto news, Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         News readNews = read(id);
@@ -110,8 +118,9 @@ public class NewsApiService implements NewsService {
      @throws AccessDeniedException if the current user is not the author of the news
      */
 
-    @Cacheable("myCache")
+    @CacheEvict(value = "news", key = "#id", condition = CacheConstants.CACHE_CONDITION)
     @Override
+    @Transactional
     public void delete(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         News read = read(id);
@@ -129,6 +138,7 @@ public class NewsApiService implements NewsService {
      @return the list of retrieved news response DTOs
      */
 
+    @Cacheable(cacheNames = "news", condition = CacheConstants.CACHE_CONDITION)
     @Override
     public List<NewsResponseDto> readAll(Pageable pageable) {
         return NewsBuilder.buildNewsResponseList(newsRepository.findAll(pageable).getContent());

@@ -26,7 +26,7 @@ public class WireMockInitializer {
         wireMockServer = new WireMockServer(wireMockConfig);
         wireMockServer.start();
 
-        wireMockServer.stubFor(get(urlEqualTo("/news-api/prod"))
+        wireMockServer.stubFor(get(urlEqualTo("/news-api/test"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBodyFile("news-api.json")));

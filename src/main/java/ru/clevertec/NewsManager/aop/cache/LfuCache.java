@@ -13,6 +13,7 @@ import java.util.*;
 
 @Slf4j
 public class LfuCache<K, V> implements CacheI<K,V>{
+
     private  int maxSize;
     private  Map<K, V> cache;
     private  Map<K, Integer> frequencies;

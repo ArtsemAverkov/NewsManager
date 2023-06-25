@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,7 @@ public class CommentController {
      * @return the Comment object
      */
 
+    @Transactional
     @GetMapping(value= "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Comment read(@PathVariable  @Valid Long id) {

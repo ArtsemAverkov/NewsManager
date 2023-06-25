@@ -9,7 +9,6 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @AllArgsConstructor
-
 public class NewsResponseDto {
     private LocalDateTime time;
     private String title;

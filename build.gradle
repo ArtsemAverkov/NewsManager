@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'ru.clevertec'
-version = '0.0.5-SNAPSHOT'
+version = '0.0.7-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -28,6 +28,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-config'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.9.1'
+
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+
+	implementation group: 'redis.clients', name: 'jedis', version: '4.4.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-client', version: '4.0.3'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	implementation group: 'org.springframework', name: 'spring-webflux', version: '6.0.9'
