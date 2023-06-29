@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.request.NewsRequestProtos;
+import ru.clevertec.NewsManager.dto.response.NewsResponseProtos;
+import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.service.news.NewsService;
 
 import java.time.LocalDateTime;
@@ -43,20 +45,20 @@ public class NewsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody @Valid NewsRequestDto news){
+    public Long create(@RequestBody @Valid NewsRequestProtos.NewsRequestDto news){
         return newsService.create(news);
     }
 
     /**
      Handles the HTTP GET request to retrieve a specific news article with its associated comments.
-     @param id the ID of the news article to retrieve
      @return the response containing the news article details and its comments
+      * @param id the ID of the news article to retrieve
      */
 
-    @GetMapping(value= "/{id}")
+    @GetMapping(value= "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public NewsResponseDto readWithComments(@PathVariable  @Valid Long id) {
-        return newsService.readNewsWithComments(id);
+    public NewsResponseProtos.NewsResponseDto readWithComments(@PathVariable  @Valid Long id) {
+       return newsService.readNewsWithComments(id);
     }
 
     /**
@@ -66,10 +68,10 @@ public class NewsController {
      @return the list of news articles matching the search criteria
      */
 
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<NewsResponseDto> searchNews(@RequestParam(required = false) String query,
-                                 @RequestParam(required = false) LocalDateTime date) {
+    public List<NewsResponseProtos.NewsResponseDto> searchNews(@RequestParam(required = false) String query,
+                                                                                  @RequestParam(required = false) LocalDateTime date) {
         return newsService.searchNews(query, date);
     }
 
@@ -81,7 +83,7 @@ public class NewsController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable @Valid Long id, @RequestBody @Valid NewsRequestDto news){
+    public void update(@PathVariable @Valid Long id, @RequestBody @Valid NewsRequestProtos.NewsRequestDto news){
          newsService.update(news, id);
     }
 
@@ -103,7 +105,7 @@ public class NewsController {
      */
 
     @GetMapping
-    public List<NewsResponseDto> readAll(@PageableDefault(page = 1, size = 10, sort = "time") Pageable pageable){
+    public List<News>  readAll(@PageableDefault Pageable pageable){
         return newsService.readAll(pageable);
     }
 }

@@ -1,4 +1,4 @@
 FROM openjdk:17-jdk
 WORKDIR /usr/local/settingApiManager
-ADD settingApiManager-0.0.8-SNAPSHOT.jar settingApiManager.jar
+ADD settingApiManager-0.0.9-SNAPSHOT.jar settingApiManager.jar
 CMD java -jar ./settingApiManager.jar

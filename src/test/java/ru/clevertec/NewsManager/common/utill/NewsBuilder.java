@@ -3,8 +3,8 @@ package ru.clevertec.NewsManager.common.utill;
 import org.jetbrains.annotations.NotNull;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.CommentResponseDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.response.CommentResponseDto;
+import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 

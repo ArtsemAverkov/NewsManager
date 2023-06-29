@@ -22,7 +22,7 @@ import ru.clevertec.NewsManager.common.utill.RequestId;
 import ru.clevertec.NewsManager.common.utill.RequestName;
 import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
 import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.NewsRepository;

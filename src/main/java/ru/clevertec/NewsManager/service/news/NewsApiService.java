@@ -13,15 +13,16 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.NewsManager.builder.NewsBuilder;
-import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.request.NewsRequestProtos;
+import ru.clevertec.NewsManager.dto.response.NewsResponseProtos;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.NewsRepository;
-import ru.clevertec.NewsManager.utill.CacheConstants;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
+import static ru.clevertec.NewsManager.builder.NewsBuilder.buildNewsResp;
 
 /**
  The NewsApiService class implements the NewsService interface and provides
@@ -41,9 +42,9 @@ public class NewsApiService implements NewsService {
      @return the ID of the created news
      */
 
-    @CachePut(value = "news", key = "#result.id", condition = CacheConstants.CACHE_CONDITION)
+    @CachePut(value = "news", key = "#result.id")
     @Override
-    public long create(NewsRequestDto news) {
+    public long create(NewsRequestProtos.NewsRequestDto news) {
         News buildCreateNews = NewsBuilder.buildCreateNews(news);
         return newsRepository.save(buildCreateNews).getId();
     }
@@ -55,7 +56,7 @@ public class NewsApiService implements NewsService {
      @throws IllegalArgumentException if the news ID is invalid
      */
 
-    @Cacheable(value = "news", key = "#id", unless = "#result == null", condition = CacheConstants.CACHE_CONDITION)
+    @Cacheable(value = "news", key = "#id", unless = "#result == null")
     @Override
     public News read(long id) {
         return newsRepository.findById(id).orElseThrow(()->
@@ -64,24 +65,25 @@ public class NewsApiService implements NewsService {
 
     /**
      Retrieves a news with its associated comments by the news ID.
-     @param id the ID of the news
      @return the news response DTO with associated comments
+      * @param id the ID of the news
      */
 
     @Override
-    public NewsResponseDto readNewsWithComments(Long id){
+    public NewsResponseProtos.NewsResponseDto readNewsWithComments(Long id){
         read(id);
-        return NewsBuilder.buildNewsResponse(newsRepository.findNewsWithComments(id));
+        News newsWithComments = newsRepository.findNewsWithComments(id);
+        return buildNewsResp(newsWithComments);
     }
 
     /**
      Searches for news based on the provided query and date.
-     @param query the search query
-     @param date the search date
      @return the list of matching news response DTOs
+      * @param query the search query
+     * @param date the search date
      */
 
-    public List<NewsResponseDto> searchNews(String query, LocalDateTime date) {
+    public List<NewsResponseProtos.NewsResponseDto> searchNews(String query, LocalDateTime date) {
         if (Objects.nonNull(query)){
             return NewsBuilder.buildNewsResponseList(newsRepository.searchNewsByQuery(query));
         }
@@ -95,10 +97,10 @@ public class NewsApiService implements NewsService {
      @throws AccessDeniedException if the current user is not the author of the news
      */
 
-    @CachePut(value = "news", key = "#id", condition = CacheConstants.CACHE_CONDITION)
+    @CachePut(value = "news", key = "#id")
     @Override
     @Transactional
-    public void update(NewsRequestDto news, Long id) {
+    public void update(NewsRequestProtos.NewsRequestDto news, Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         News readNews = read(id);
         if (readNews.getAuthor().equals(authentication.getName())) {
@@ -118,7 +120,7 @@ public class NewsApiService implements NewsService {
      @throws AccessDeniedException if the current user is not the author of the news
      */
 
-    @CacheEvict(value = "news", key = "#id", condition = CacheConstants.CACHE_CONDITION)
+    @CacheEvict(value = "news", key = "#id")
     @Override
     @Transactional
     public void delete(Long id) {
@@ -138,9 +140,10 @@ public class NewsApiService implements NewsService {
      @return the list of retrieved news response DTOs
      */
 
-    @Cacheable(cacheNames = "news", condition = CacheConstants.CACHE_CONDITION)
+
+    @Cacheable(cacheNames = "newsCash")
     @Override
-    public List<NewsResponseDto> readAll(Pageable pageable) {
-        return NewsBuilder.buildNewsResponseList(newsRepository.findAll(pageable).getContent());
+    public List<News> readAll(Pageable pageable) {
+        return newsRepository.findAll(pageable).getContent();
     }
 }

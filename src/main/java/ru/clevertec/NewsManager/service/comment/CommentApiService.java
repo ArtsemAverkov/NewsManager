@@ -12,12 +12,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.clevertec.NewsManager.builder.CommentBuilder;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.CommentRepository;
 import ru.clevertec.NewsManager.service.news.NewsService;
-import ru.clevertec.NewsManager.utill.CacheConstants;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "commentCa")
+@CacheConfig(cacheNames = "commentCaches")
 public class CommentApiService implements CommentService{
 
     private final CommentRepository commentRepository;
@@ -45,7 +45,7 @@ public class CommentApiService implements CommentService{
     @CachePut(value = "comment", key = "#id")
     @Transactional
     @Override
-    public long create(CommentRequestDto comment) {
+    public long create(CommentRequestProtos.CommentRequestDto comment) {
         News news = newsService.read(comment.getNewsId());
         Comment builderComment = CommentBuilder.buildCreateComment(comment);
         builderComment.setNews(news);
@@ -73,10 +73,10 @@ public class CommentApiService implements CommentService{
      @throws AccessDeniedException if the current user is not the author of the comment
      */
 
-    @CachePut(value = "comment", key = "#id", condition = CacheConstants.CACHE_CONDITION)
+    @CachePut(value = "comment", key = "#id")
     @Override
     @Transactional
-    public void update(CommentRequestDto comment, Long id) {
+    public void update(CommentRequestProtos.CommentRequestDto comment, Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Comment readComment = read(id);
         if (readComment.getUsername().equals(authentication.getName())) {
@@ -96,7 +96,7 @@ public class CommentApiService implements CommentService{
      @throws AccessDeniedException if the current user is not the author of the comment
      */
 
-    @CacheEvict(value = "comment", key = "#id", condition = CacheConstants.CACHE_CONDITION)
+    @CacheEvict(value = "comment", key = "#id")
     @Override
     @Transactional
     public void delete(Long id) {
@@ -117,7 +117,7 @@ public class CommentApiService implements CommentService{
      @return the list of retrieved comments
      */
 
-    @Cacheable(cacheNames = "comment", condition = CacheConstants.CACHE_CONDITION)
+    @Cacheable(cacheNames = "commentCaches")
     @Override
     public List<Comment> readAll(Pageable pageable) {
         return  commentRepository.findAll(pageable).getContent();

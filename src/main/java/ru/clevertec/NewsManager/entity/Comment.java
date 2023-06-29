@@ -1,6 +1,7 @@
 package ru.clevertec.NewsManager.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
@@ -45,8 +46,9 @@ public class Comment implements Serializable {
     private String text;
     private String username;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "news_id")
+    @JsonIgnore
     private News news;
 
 }

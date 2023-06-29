@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package ru.clevertec.NewsManager.dto.request;
+
+option java_package = "ru.clevertec.NewsManager.dto.request";
+option java_outer_classname = "UserRequestProtos";
+
+message UserRequestDto {
+  string username = 1;
+  string password = 2;
+  string role = 3;
+}

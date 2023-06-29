@@ -4,9 +4,8 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.CommentResponseDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.response.CommentResponseDto;
+import ru.clevertec.NewsManager.dto.response.NewsResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

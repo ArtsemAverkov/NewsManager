@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.service.comment.CommentService;
 
@@ -42,7 +42,7 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody @Valid CommentRequestDto comment){
+    public Long create(@RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
         return commentService.create(comment);
     }
 
@@ -68,7 +68,7 @@ public class CommentController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestDto comment){
+    public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
         commentService.update(comment, id);
     }
 

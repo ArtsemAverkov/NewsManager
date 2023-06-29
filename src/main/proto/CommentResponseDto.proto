@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ru.clevertec.NewsManager.dto;
+
+option java_package = "ru.clevertec.NewsManager.dto.response";
+option java_outer_classname = "CommentResponseProtos";
+
+message CommentResponseDto {
+  sint64 id = 1;
+  string username = 2;
+  string text = 3;
+  string time = 4;
+}
+

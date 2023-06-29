@@ -1,15 +1,83 @@
+#version: '3.8'
+#services:
+#  newsManager:
+#    build:
+#      context: services/newsManager
+#      dockerfile: Dockerfile
+#    links:
+#      - redis
+#    image: 'applicatio15:news'
+#    environment:
+#      - SPRING_APPLICATION_NAME=news-api
+#      - SPRING_PROFILES_ACTIVE=prod
+#      - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
+#      - SPRING_REDIS_HOST=redis
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
+#      - USER_MANAGER_URL=http://userManager:8084/users
+#    ports:
+#      - 8088:8088
+#    depends_on:
+#      - userManager
+#      - settingApiManager
+#      - redis
+#
+#  userManager:
+#    build:
+#      context: services/userManager
+#      dockerfile: Dockerfile
+#    environment:
+#      - SPRING_APPLICATION_NAME=user-api
+#      - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
+#    image: 'applicatio15:user'
+#    ports:
+#      - 8084:8084
+#    depends_on:
+#      - settingApiManager
+#
+#  settingApiManager:
+#    build:
+#      context: services/settingApiManager
+#      dockerfile: Dockerfile
+#    image: 'applicatio15:setting'
+#    ports:
+#      - 8086:8086
+#
+#  postgres:
+#    build:
+#      context: services/postgres
+#      dockerfile: Dockerfile
+#    environment:
+#      - POSTGRES_USER=artemaverkov
+#      - POSTGRES_DB=root
+#      - POSTGRES_PASSWORD=root
+#    ports:
+#      - 5432:5432
+#
+#  redis:
+#    build:
+#      context: services/redis
+#      dockerfile: Dockerfile
+#    image: redis
+#    ports:
+#      - 6379:6379
+
 version: '3.8'
+
 services:
   newsManager:
     build:
       context: services/newsManager
       dockerfile: Dockerfile
-    image: 'applicatio15:news'
+    links:
+      - redis
+    image: 'applicatio17:news'
     environment:
       - SPRING_APPLICATION_NAME=news-api
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
-      - SPRING_REDIS_HOST=http://redisCache
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PASSWORD= eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
       - USER_MANAGER_URL=http://userManager:8084/users
     ports:
@@ -17,7 +85,9 @@ services:
     depends_on:
       - userManager
       - settingApiManager
-      - redisCache
+      - redis
+    networks:
+      - my_network
 
   userManager:
     build:
@@ -27,19 +97,23 @@ services:
       - SPRING_APPLICATION_NAME=user-api
       - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
-    image: 'applicatio15:user'
+    image: 'applicatio17:user'
     ports:
       - 8084:8084
     depends_on:
       - settingApiManager
+    networks:
+      - my_network
 
   settingApiManager:
     build:
       context: services/settingApiManager
       dockerfile: Dockerfile
-    image: 'applicatio15:setting'
+    image: 'applicatio17:setting'
     ports:
       - 8086:8086
+    networks:
+      - my_network
 
   postgres:
     build:
@@ -51,14 +125,18 @@ services:
       - POSTGRES_PASSWORD=root
     ports:
       - 5432:5432
+    networks:
+      - my_network
 
-  redisCache:
-    image: 'redis'
+  redis:
+    image: redis
+    restart: always
     ports:
-      - 6379:6379
+      - '6379:6379'
+#    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    networks:
+      - my_network
 
-
-
-
-
+networks:
+  my_network:
 
