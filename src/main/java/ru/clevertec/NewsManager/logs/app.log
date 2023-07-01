@@ -4245,3 +4245,292 @@ You may wish to exclude one of them to ensure predictable runtime behavior
 2023-07-01 19:09:42,764 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@475646d4{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
 2023-07-01 19:09:42,768 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@7523a3dc{/,null,STOPPED}
 2023-07-01 19:09:42,770 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@2a334bac{/__admin,null,STOPPED}
+2023-07-01 23:03:24,654 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [Test worker] Could not detect default configuration classes for test class [ru.clevertec.NewsManager.NewsManagerApplicationTests]: NewsManagerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-07-01 23:03:24,947 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [Test worker] Found @SpringBootConfiguration ru.clevertec.NewsManager.NewsManagerApplication for test class ru.clevertec.NewsManager.NewsManagerApplicationTests
+2023-07-01 23:03:27,600 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:03:27,660 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@c8f97a7{/__admin,null,AVAILABLE}
+2023-07-01 23:03:27,681 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:03:27,681 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@73c48264{/,null,AVAILABLE}
+2023-07-01 23:03:27,700 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@7d247660{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:27,718 INFO o.e.j.s.Server [Test worker] Started Server@5190010f{STARTING}[11.0.15,sto=1000] @6615ms
+2023-07-01 23:03:29,786 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-07-01 23:03:29,854 WARN o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [Test worker] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-07-01 23:03:29,912 INFO r.c.N.NewsManagerApplicationTests [Test worker] Starting NewsManagerApplicationTests using Java 17.0.2 with PID 63591 (started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-07-01 23:03:29,913 DEBUG r.c.N.NewsManagerApplicationTests [Test worker] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-01 23:03:29,913 INFO r.c.N.NewsManagerApplicationTests [Test worker] The following 1 profile is active: "prod"
+2023-07-01 23:03:30,494 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:30,495 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@4b4927e5 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:30,495 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:30,495 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Located environment: name=news-api, profiles=[prod], label=null, version=null, state=null
+2023-07-01 23:03:30,495 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:30,495 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@2b098563 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:32,025 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-01 23:03:32,027 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-01 23:03:32,129 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Finished Spring Data repository scanning in 57 ms. Found 0 Redis repository interfaces.
+2023-07-01 23:03:32,740 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-01 23:03:32,742 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-01 23:03:33,123 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Finished Spring Data repository scanning in 373 ms. Found 2 JPA repository interfaces.
+2023-07-01 23:03:33,195 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-01 23:03:33,195 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-01 23:03:33,253 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [Test worker] Spring Data Redis - Could not safely identify store assignment for repository candidate interface ru.clevertec.NewsManager.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-07-01 23:03:33,257 INFO o.s.d.r.c.RepositoryConfigurationExtensionSupport [Test worker] Spring Data Redis - Could not safely identify store assignment for repository candidate interface ru.clevertec.NewsManager.repository.NewsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-07-01 23:03:33,260 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Finished Spring Data repository scanning in 63 ms. Found 0 Redis repository interfaces.
+2023-07-01 23:03:34,171 INFO o.s.c.c.s.GenericScope [Test worker] BeanFactory id=07f88d98-d189-32cf-8cc8-181fb958ddc0
+2023-07-01 23:03:34,452 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [Test worker] Bean 'ru.clevertec.NewsManager.repository.UserManagementClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-01 23:03:34,557 WARN o.s.c.LocalVariableTableParameterNameDiscoverer [Test worker] Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: ru.clevertec.controllerlogspringbootstarter.aop.loger.ControllersLogAspect
+2023-07-01 23:03:36,863 INFO c.z.h.HikariDataSource [Test worker] HikariPool-1 - Starting...
+2023-07-01 23:03:37,060 INFO c.z.h.p.HikariPool [Test worker] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@52ec5ba6
+2023-07-01 23:03:37,065 INFO c.z.h.HikariDataSource [Test worker] HikariPool-1 - Start completed.
+2023-07-01 23:03:37,412 INFO l.database [Test worker] Set default schema name to public
+2023-07-01 23:03:37,736 INFO l.lockservice [Test worker] Successfully acquired change log lock
+2023-07-01 23:03:38,567 INFO l.changelog [Test worker] Reading from public.databasechangelog
+2023-07-01 23:03:38,638 INFO l.changelog [Test worker] Reading from public.databasechangelog
+2023-07-01 23:03:38,663 INFO l.util [Test worker] UPDATE SUMMARY
+2023-07-01 23:03:38,664 INFO l.util [Test worker] Run:                          0
+2023-07-01 23:03:38,665 INFO l.util [Test worker] Previously run:               5
+2023-07-01 23:03:38,665 INFO l.util [Test worker] Filtered out:                 0
+2023-07-01 23:03:38,665 INFO l.util [Test worker] -------------------------------
+2023-07-01 23:03:38,665 INFO l.util [Test worker] Total change sets:            5
+
+2023-07-01 23:03:38,666 INFO l.util [Test worker] Update summary generated
+2023-07-01 23:03:38,672 INFO l.lockservice [Test worker] Successfully released change log lock
+2023-07-01 23:03:38,681 INFO l.lockservice [Test worker] Successfully released change log lock
+2023-07-01 23:03:38,682 INFO l.command [Test worker] Command execution complete
+2023-07-01 23:03:38,947 INFO o.h.j.i.u.LogHelper [Test worker] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-01 23:03:39,049 INFO o.h.Version [Test worker] HHH000412: Hibernate ORM core version 6.2.2.Final
+2023-07-01 23:03:39,052 INFO o.h.c.Environment [Test worker] HHH000406: Using bytecode reflection optimizer
+2023-07-01 23:03:39,268 INFO o.h.b.i.BytecodeProviderInitiator [Test worker] HHH000021: Bytecode provider name : bytebuddy
+2023-07-01 23:03:39,481 INFO o.s.o.j.p.SpringPersistenceUnitInfo [Test worker] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-01 23:03:39,546 INFO o.h.o.dialect [Test worker] HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@728cef8e
+2023-07-01 23:03:39,908 INFO o.h.b.i.BytecodeProviderInitiator [Test worker] HHH000021: Bytecode provider name : bytebuddy
+2023-07-01 23:03:41,198 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [Test worker] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-01 23:03:41,443 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [Test worker] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-01 23:03:42,135 INFO o.s.d.j.r.q.QueryEnhancerFactory [Test worker] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-01 23:03:43,627 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [Test worker] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-01 23:03:43,835 INFO o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [Test worker] Autowired annotation is not supported on static fields: private static java.lang.String ru.clevertec.NewsManager.security.JwtTokenGenerator.SECRET_KEY
+2023-07-01 23:03:45,263 INFO o.s.s.w.DefaultSecurityFilterChain [Test worker] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@517cfd07, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14017887, org.springframework.security.web.context.SecurityContextHolderFilter@7b960a6d, org.springframework.security.web.header.HeaderWriterFilter@2a0b4810, org.springframework.security.web.authentication.logout.LogoutFilter@7d028b1d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1332f571, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@66075044, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2c193600, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4c6e3c25, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@42d99e91, org.springframework.security.web.session.ConcurrentSessionFilter@321a4c09, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@21743abe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5dc38bc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@15af39d5, org.springframework.security.web.access.ExceptionTranslationFilter@de44b10, org.springframework.security.web.access.intercept.AuthorizationFilter@3cfc0190]
+2023-07-01 23:03:46,582 INFO r.c.N.NewsManagerApplicationTests [Test worker] Started NewsManagerApplicationTests in 18.675 seconds (process running for 25.479)
+2023-07-01 23:03:47,449 INFO o.e.j.s.Server [Test worker] Stopped Server@5190010f{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:47,450 INFO o.e.j.s.Server [Test worker] Shutdown Server@5190010f{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:47,455 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@7d247660{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:47,458 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@73c48264{/,null,STOPPED}
+2023-07-01 23:03:47,458 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@c8f97a7{/__admin,null,STOPPED}
+2023-07-01 23:03:49,372 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:03:49,379 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@161267b6{/__admin,null,AVAILABLE}
+2023-07-01 23:03:49,381 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:03:49,381 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@6b25f5df{/,null,AVAILABLE}
+2023-07-01 23:03:49,382 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@ff2e200{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:49,385 INFO o.e.j.s.Server [Test worker] Started Server@648c8c22{STARTING}[11.0.15,sto=1000] @28280ms
+2023-07-01 23:03:49,688 WARN o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [Test worker] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-07-01 23:03:49,693 INFO r.c.N.c.c.CommentControllerTest [Test worker] Starting CommentControllerTest using Java 17.0.2 with PID 63591 (started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-07-01 23:03:49,693 DEBUG r.c.N.c.c.CommentControllerTest [Test worker] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-01 23:03:49,693 INFO r.c.N.c.c.CommentControllerTest [Test worker] The following 1 profile is active: "prod"
+2023-07-01 23:03:49,697 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:49,698 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@68ffbc99 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:49,698 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:49,698 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Located environment: name=news-api, profiles=[prod], label=null, version=null, state=null
+2023-07-01 23:03:49,698 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:49,698 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@57336465 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:50,481 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [Test worker] Bean 'ru.clevertec.NewsManager.repository.UserManagementClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-01 23:03:50,505 INFO o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [Test worker] Autowired annotation is not supported on static fields: private static java.lang.String ru.clevertec.NewsManager.security.JwtTokenGenerator.SECRET_KEY
+2023-07-01 23:03:50,769 INFO o.s.s.w.DefaultSecurityFilterChain [Test worker] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@33963f9a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@300f34aa, org.springframework.security.web.context.SecurityContextHolderFilter@411b9394, org.springframework.security.web.header.HeaderWriterFilter@e6fa52c, org.springframework.security.web.authentication.logout.LogoutFilter@624b0e1b, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@2602f45, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@38e1d2c4, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@fe618cc, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@8b1263c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@64eb79d, org.springframework.security.web.session.ConcurrentSessionFilter@2ef28b4b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4196c03b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@32235be0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3951efe0, org.springframework.security.web.access.ExceptionTranslationFilter@5c3b86da, org.springframework.security.web.access.intercept.AuthorizationFilter@4b9eea40]
+2023-07-01 23:03:50,923 INFO o.s.b.t.m.w.SpringBootMockServletContext [Test worker] Initializing Spring TestDispatcherServlet ''
+2023-07-01 23:03:50,924 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Initializing Servlet ''
+2023-07-01 23:03:50,925 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Completed initialization in 1 ms
+2023-07-01 23:03:51,104 INFO r.c.N.c.c.CommentControllerTest [Test worker] Started CommentControllerTest in 1.712 seconds (process running for 30.0)
+2023-07-01 23:03:51,956 INFO o.e.j.s.Server [Test worker] Stopped Server@648c8c22{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:51,956 INFO o.e.j.s.Server [Test worker] Shutdown Server@648c8c22{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:51,957 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@ff2e200{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:51,958 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@6b25f5df{/,null,STOPPED}
+2023-07-01 23:03:51,959 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@161267b6{/__admin,null,STOPPED}
+2023-07-01 23:03:52,003 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:03:52,005 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@3d4bc978{/__admin,null,AVAILABLE}
+2023-07-01 23:03:52,006 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:03:52,006 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@7bf974a1{/,null,AVAILABLE}
+2023-07-01 23:03:52,006 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@5e2abff2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:52,007 INFO o.e.j.s.Server [Test worker] Started Server@6b8fbed4{STARTING}[11.0.15,sto=1000] @30904ms
+2023-07-01 23:03:52,160 WARN o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [Test worker] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-07-01 23:03:52,163 INFO r.c.N.c.c.NewsControllerTest [Test worker] Starting NewsControllerTest using Java 17.0.2 with PID 63591 (started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-07-01 23:03:52,163 DEBUG r.c.N.c.c.NewsControllerTest [Test worker] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-01 23:03:52,164 INFO r.c.N.c.c.NewsControllerTest [Test worker] The following 1 profile is active: "prod"
+2023-07-01 23:03:52,167 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:52,167 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@1e3dba91 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:52,167 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:52,167 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Located environment: name=news-api, profiles=[prod], label=null, version=null, state=null
+2023-07-01 23:03:52,167 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:52,167 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@6ba06b63 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:52,682 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [Test worker] Bean 'ru.clevertec.NewsManager.repository.UserManagementClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-07-01 23:03:52,691 INFO o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [Test worker] Autowired annotation is not supported on static fields: private static java.lang.String ru.clevertec.NewsManager.security.JwtTokenGenerator.SECRET_KEY
+2023-07-01 23:03:52,854 INFO o.s.s.w.DefaultSecurityFilterChain [Test worker] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1836bae2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@296c2483, org.springframework.security.web.context.SecurityContextHolderFilter@3f8b759e, org.springframework.security.web.header.HeaderWriterFilter@72fc0b37, org.springframework.security.web.authentication.logout.LogoutFilter@73831f3b, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@6a9b6e01, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@18adeae, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@75ca3140, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5de1852b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7e44f0ae, org.springframework.security.web.session.ConcurrentSessionFilter@2ac05560, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6795bfdc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@75a2b5aa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5a208e17, org.springframework.security.web.access.ExceptionTranslationFilter@69bcbb8, org.springframework.security.web.access.intercept.AuthorizationFilter@4275ec8f]
+2023-07-01 23:03:52,902 INFO o.s.b.t.m.w.SpringBootMockServletContext [Test worker] Initializing Spring TestDispatcherServlet ''
+2023-07-01 23:03:52,902 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Initializing Servlet ''
+2023-07-01 23:03:52,902 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Completed initialization in 0 ms
+2023-07-01 23:03:52,917 INFO r.c.N.c.c.NewsControllerTest [Test worker] Started NewsControllerTest in 0.906 seconds (process running for 31.814)
+2023-07-01 23:03:53,159 INFO o.e.j.s.Server [Test worker] Stopped Server@6b8fbed4{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:53,160 INFO o.e.j.s.Server [Test worker] Shutdown Server@6b8fbed4{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:53,164 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@5e2abff2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:53,164 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@7bf974a1{/,null,STOPPED}
+2023-07-01 23:03:53,165 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@3d4bc978{/__admin,null,STOPPED}
+2023-07-01 23:03:53,192 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:03:53,195 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@642d1c05{/__admin,null,AVAILABLE}
+2023-07-01 23:03:53,195 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:03:53,195 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@1c8fc4d8{/,null,AVAILABLE}
+2023-07-01 23:03:53,196 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@63c8550f{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:53,196 INFO o.e.j.s.Server [Test worker] Started Server@127f4aa{STARTING}[11.0.15,sto=1000] @32093ms
+2023-07-01 23:03:53,303 WARN o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [Test worker] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-07-01 23:03:53,306 INFO r.c.N.c.c.UserControllerTest [Test worker] Starting UserControllerTest using Java 17.0.2 with PID 63591 (started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-07-01 23:03:53,306 DEBUG r.c.N.c.c.UserControllerTest [Test worker] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-01 23:03:53,306 INFO r.c.N.c.c.UserControllerTest [Test worker] The following 1 profile is active: "prod"
+2023-07-01 23:03:53,311 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:53,311 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@3ed88a6b uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:53,311 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:53,311 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Located environment: name=news-api, profiles=[prod], label=null, version=null, state=null
+2023-07-01 23:03:53,311 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:03:53,311 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@509cd1d uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:03:53,661 INFO o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [Test worker] Autowired annotation is not supported on static fields: private static java.lang.String ru.clevertec.NewsManager.security.JwtTokenGenerator.SECRET_KEY
+2023-07-01 23:03:53,766 INFO o.s.s.w.DefaultSecurityFilterChain [Test worker] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70c36138, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6065bbb3, org.springframework.security.web.context.SecurityContextHolderFilter@70abce79, org.springframework.security.web.header.HeaderWriterFilter@79c19a59, org.springframework.security.web.authentication.logout.LogoutFilter@7aaed8a0, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1b617ae1, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@1706caf5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@200aae61, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6abeb7d6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@41159428, org.springframework.security.web.session.ConcurrentSessionFilter@77a3ed5f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7779243b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21f7bdf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@349953cd, org.springframework.security.web.access.ExceptionTranslationFilter@735e9176, org.springframework.security.web.access.intercept.AuthorizationFilter@1c09921a]
+2023-07-01 23:03:53,808 INFO o.s.b.t.m.w.SpringBootMockServletContext [Test worker] Initializing Spring TestDispatcherServlet ''
+2023-07-01 23:03:53,808 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Initializing Servlet ''
+2023-07-01 23:03:53,809 INFO o.s.t.w.s.TestDispatcherServlet [Test worker] Completed initialization in 1 ms
+2023-07-01 23:03:53,821 INFO r.c.N.c.c.UserControllerTest [Test worker] Started UserControllerTest in 0.621 seconds (process running for 32.718)
+2023-07-01 23:03:53,899 INFO o.e.j.s.Server [Test worker] Stopped Server@127f4aa{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:53,899 INFO o.e.j.s.Server [Test worker] Shutdown Server@127f4aa{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:03:53,900 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@63c8550f{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:03:53,900 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@1c8fc4d8{/,null,STOPPED}
+2023-07-01 23:03:53,901 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@642d1c05{/__admin,null,STOPPED}
+2023-07-01 23:03:53,989 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [Test worker] Could not detect default configuration classes for test class [ru.clevertec.NewsManager.common.integration.CommentsPostgresQLRepositoryTest]: CommentsPostgresQLRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-07-01 23:03:54,039 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [Test worker] Found @SpringBootConfiguration ru.clevertec.NewsManager.NewsManagerApplication for test class ru.clevertec.NewsManager.common.integration.CommentsPostgresQLRepositoryTest
+2023-07-01 23:03:54,126 INFO o.t.u.ImageNameSubstitutor [Test worker] Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2023-07-01 23:03:54,589 INFO o.t.d.DockerClientProviderStrategy [Test worker] Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2023-07-01 23:03:55,617 INFO o.t.d.DockerClientProviderStrategy [Test worker] Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2023-07-01 23:03:55,625 INFO o.t.DockerClientFactory [Test worker] Docker host IP address is localhost
+2023-07-01 23:03:55,691 INFO o.t.DockerClientFactory [Test worker] Connected to docker: 
+  Server Version: 20.10.21
+  API Version: 1.41
+  Operating System: Docker Desktop
+  Total Memory: 3933 MB
+2023-07-01 23:03:55,825 INFO t.t.4.0 [Test worker] Creating container for image: testcontainers/ryuk:0.4.0
+2023-07-01 23:03:56,738 INFO o.t.u.RegistryAuthLocator [Test worker] Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2023-07-01 23:03:57,458 INFO t.t.4.0 [Test worker] Container testcontainers/ryuk:0.4.0 is starting: 4408a5df1aa0eddaaf561aa3aab26a78917b8fd8f58096cb1769cd6123341b52
+2023-07-01 23:03:59,030 INFO t.t.4.0 [Test worker] Container testcontainers/ryuk:0.4.0 started in PT3.324571S
+2023-07-01 23:03:59,060 INFO o.t.u.RyukResourceReaper [Test worker] Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2023-07-01 23:03:59,060 INFO o.t.DockerClientFactory [Test worker] Checking the system...
+2023-07-01 23:03:59,062 INFO o.t.DockerClientFactory [Test worker] ✔︎ Docker server version should be at least 1.6.0
+2023-07-01 23:03:59,064 INFO t.p.3 [Test worker] Creating container for image: postgres:14.3
+2023-07-01 23:03:59,111 INFO t.p.3 [Test worker] Container postgres:14.3 is starting: 67f9837e4be3c494567de5d573d161681f8ba94662f0a6b8d047f9e783fc08ca
+2023-07-01 23:04:00,523 INFO t.p.3 [Test worker] Container postgres:14.3 started in PT1.459164S
+2023-07-01 23:04:00,534 INFO t.p.3 [Test worker] Container is started (JDBC URL: jdbc:postgresql://localhost:62298/test?loggerLevel=OFF)
+2023-07-01 23:04:00,584 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:04:00,589 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@514c684d{/__admin,null,AVAILABLE}
+2023-07-01 23:04:00,591 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:04:00,591 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@6a5b87dc{/,null,AVAILABLE}
+2023-07-01 23:04:00,595 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@324f600a{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:04:00,596 INFO o.e.j.s.Server [Test worker] Started Server@6d02203c{STARTING}[11.0.15,sto=1000] @39492ms
+2023-07-01 23:04:00,921 WARN o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [Test worker] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/Users/artemaverkov/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-07-01 23:04:00,929 INFO r.c.N.c.i.CommentsPostgresQLRepositoryTest [Test worker] Starting CommentsPostgresQLRepositoryTest using Java 17.0.2 with PID 63591 (started by artemaverkov in /Users/artemaverkov/Concurrency/NewsManager/NewsManager)
+2023-07-01 23:04:00,929 DEBUG r.c.N.c.i.CommentsPostgresQLRepositoryTest [Test worker] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-01 23:04:00,930 INFO r.c.N.c.i.CommentsPostgresQLRepositoryTest [Test worker] The following 1 profile is active: "prod"
+2023-07-01 23:04:00,938 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:04:00,938 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@1a70c20c uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:04:00,938 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:04:00,938 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Located environment: name=news-api, profiles=[prod], label=null, version=null, state=null
+2023-07-01 23:04:00,938 INFO o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Fetching config from server at : http://localhost:8086
+2023-07-01 23:04:00,938 WARN o.s.c.c.c.ConfigServerConfigDataLoader [Test worker] Could not locate PropertySource ([ConfigServerConfigDataResource@1617f122 uris = array<String>['http://localhost:8086'], optional = true, profiles = list['default']]): None of labels [] found
+2023-07-01 23:04:01,213 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-01 23:04:01,214 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-01 23:04:01,245 INFO o.s.d.r.c.RepositoryConfigurationDelegate [Test worker] Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+2023-07-01 23:04:01,384 INFO c.z.h.HikariDataSource [Test worker] HikariPool-2 - Starting...
+2023-07-01 23:04:01,513 INFO c.z.h.p.HikariPool [Test worker] HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@6ef2412
+2023-07-01 23:04:01,514 INFO c.z.h.HikariDataSource [Test worker] HikariPool-2 - Start completed.
+2023-07-01 23:04:01,535 INFO l.database [Test worker] Set default schema name to public
+2023-07-01 23:04:01,632 INFO l.lockservice [Test worker] Successfully acquired change log lock
+2023-07-01 23:04:01,818 INFO l.changelog [Test worker] Creating database history table with name: public.databasechangelog
+2023-07-01 23:04:01,829 INFO l.changelog [Test worker] Reading from public.databasechangelog
+2023-07-01 23:04:02,021 INFO l.util [Test worker] UPDATE SUMMARY
+2023-07-01 23:04:02,022 INFO l.util [Test worker] Run:                          5
+2023-07-01 23:04:02,022 INFO l.util [Test worker] Previously run:               0
+2023-07-01 23:04:02,022 INFO l.util [Test worker] Filtered out:                 0
+2023-07-01 23:04:02,022 INFO l.util [Test worker] -------------------------------
+2023-07-01 23:04:02,022 INFO l.util [Test worker] Total change sets:            5
+
+2023-07-01 23:04:02,023 INFO l.util [Test worker] Update summary generated
+2023-07-01 23:04:02,031 INFO l.lockservice [Test worker] Successfully released change log lock
+2023-07-01 23:04:02,060 INFO l.lockservice [Test worker] Successfully released change log lock
+2023-07-01 23:04:02,061 INFO l.command [Test worker] Command execution complete
+2023-07-01 23:04:02,117 INFO o.h.j.i.u.LogHelper [Test worker] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-01 23:04:02,138 INFO o.h.b.i.BytecodeProviderInitiator [Test worker] HHH000021: Bytecode provider name : bytebuddy
+2023-07-01 23:04:02,139 INFO o.s.o.j.p.SpringPersistenceUnitInfo [Test worker] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-01 23:04:02,143 INFO o.h.o.dialect [Test worker] HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@3e0391a3
+2023-07-01 23:04:02,173 INFO o.h.b.i.BytecodeProviderInitiator [Test worker] HHH000021: Bytecode provider name : bytebuddy
+2023-07-01 23:04:02,317 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [Test worker] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-01 23:04:02,371 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [Test worker] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-01 23:04:02,588 INFO r.c.N.c.i.CommentsPostgresQLRepositoryTest [Test worker] Started CommentsPostgresQLRepositoryTest in 1.969 seconds (process running for 41.484)
+2023-07-01 23:04:03,086 INFO o.e.j.s.Server [Test worker] Stopped Server@6d02203c{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:04:03,087 INFO o.e.j.s.Server [Test worker] Shutdown Server@6d02203c{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:04:03,105 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@324f600a{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:04:03,108 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@6a5b87dc{/,null,STOPPED}
+2023-07-01 23:04:03,109 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@514c684d{/__admin,null,STOPPED}
+2023-07-01 23:04:03,126 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [Test worker] Could not detect default configuration classes for test class [ru.clevertec.NewsManager.common.integration.NewsPostgresQLRepositoryTest]: NewsPostgresQLRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-07-01 23:04:03,145 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [Test worker] Found @SpringBootConfiguration ru.clevertec.NewsManager.NewsManagerApplication for test class ru.clevertec.NewsManager.common.integration.NewsPostgresQLRepositoryTest
+2023-07-01 23:04:03,151 INFO t.p.3 [Test worker] Creating container for image: postgres:14.3
+2023-07-01 23:04:03,247 INFO t.p.3 [Test worker] Container postgres:14.3 is starting: f05302c7fe2de7feab7167e6dc805f13a5d5bbb6e39b9a165b4a7d0408fa500e
+2023-07-01 23:04:04,574 INFO t.p.3 [Test worker] Container postgres:14.3 started in PT1.42255S
+2023-07-01 23:04:04,579 INFO t.p.3 [Test worker] Container is started (JDBC URL: jdbc:postgresql://localhost:62310/test?loggerLevel=OFF)
+2023-07-01 23:04:04,610 INFO o.e.j.s.Server [Test worker] jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.2+8-LTS
+2023-07-01 23:04:04,616 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@129908da{/__admin,null,AVAILABLE}
+2023-07-01 23:04:04,618 INFO o.e.j.s.h.C.ROOT [Test worker] RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2023-07-01 23:04:04,618 INFO o.e.j.s.h.ContextHandler [Test worker] Started o.e.j.s.ServletContextHandler@1490d71d{/,null,AVAILABLE}
+2023-07-01 23:04:04,619 INFO o.e.j.s.AbstractConnector [Test worker] Started NetworkTrafficServerConnector@6626282a{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:04:04,620 INFO o.e.j.s.Server [Test worker] Started Server@3767f4e1{STARTING}[11.0.15,sto=1000] @43516ms
+2023-07-01 23:04:04,825 INFO o.e.j.s.Server [Test worker] Stopped Server@3767f4e1{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:04:04,826 INFO o.e.j.s.Server [Test worker] Shutdown Server@3767f4e1{STOPPING}[11.0.15,sto=1000]
+2023-07-01 23:04:04,828 INFO o.e.j.s.AbstractConnector [Test worker] Stopped NetworkTrafficServerConnector@6626282a{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8086}
+2023-07-01 23:04:04,830 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@1490d71d{/,null,STOPPED}
+2023-07-01 23:04:04,830 INFO o.e.j.s.h.ContextHandler [Test worker] Stopped o.e.j.s.ServletContextHandler@129908da{/__admin,null,STOPPED}
+2023-07-01 23:04:05,803 WARN o.s.b.f.s.DisposableBeanAdapter [SpringApplicationShutdownHook] Invocation of destroy method failed on bean with name 'reactorResourceFactory': java.lang.NullPointerException: Cannot load from int array because "__$localLineHits$__" is null
+2023-07-01 23:04:05,822 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-01 23:04:05,830 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-07-01 23:04:05,840 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-07-01 23:04:05,900 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-01 23:04:05,902 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown initiated...
+2023-07-01 23:04:05,906 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-2 - Shutdown completed.

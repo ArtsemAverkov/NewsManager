@@ -37,7 +37,7 @@ import static ru.clevertec.NewsManager.common.utill.CommentBuilder.createUserDet
 @ContextConfiguration(classes = NewsManagerApplication.class)
 @WebMvcTest({UserController.class, SecurityConfig.class, JwtTokenGenerator.class})
 @AutoConfigureMockMvc
-@DisplayName("Testing News Controller")
+@DisplayName("Testing User Controller")
 public class UserControllerTest {
 
     @MockBean

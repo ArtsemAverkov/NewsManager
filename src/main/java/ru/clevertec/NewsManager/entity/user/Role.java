@@ -1,14 +1,12 @@
 package ru.clevertec.NewsManager.entity.user;
 
-import lombok.Setter;
-import lombok.Getter;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {

@@ -1,15 +1,13 @@
 package ru.clevertec.NewsManager.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Setter;
-import lombok.Getter;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@ToString
+@EqualsAndHashCode
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @NoArgsConstructor
