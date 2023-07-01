@@ -20,6 +20,7 @@ import ru.clevertec.NewsManager.dto.request.NewsRequestProtos;
 import ru.clevertec.NewsManager.dto.response.NewsResponseProtos;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.service.news.NewsService;
+import ru.clevertec.exceptionhandlerspringbootstarter.EnableExceptionHandling;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/news")
 @RequiredArgsConstructor
+@EnableExceptionHandling
 public class NewsController {
 
     private final NewsService newsService;
@@ -71,7 +73,7 @@ public class NewsController {
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<NewsResponseProtos.NewsResponseDto> searchNews(@RequestParam(required = false) String query,
-                                                                                  @RequestParam(required = false) LocalDateTime date) {
+                                                               @RequestParam(required = false) LocalDateTime date) {
         return newsService.searchNews(query, date);
     }
 

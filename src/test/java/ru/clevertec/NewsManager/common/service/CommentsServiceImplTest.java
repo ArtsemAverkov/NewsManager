@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsRequestDto;
 import ru.clevertec.NewsManager.common.utill.RequestId;
 import ru.clevertec.NewsManager.common.utill.RequestName;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.CommentRepository;
@@ -75,7 +75,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldReadCommentsWhenCommentsValid(CommentRequestDto commentRequestDto) {
+        void shouldReadCommentsWhenCommentsValid(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             when(commentRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.ofNullable(builderCreateComment));
             assertEquals(builderCreateComment, commentApiService.read(RequestId.VALUE_1.getValue()));
@@ -87,7 +87,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldCreateCommentsWhenCommentsIsValid(CommentRequestDto commentRequestDto) {
+        void shouldCreateCommentsWhenCommentsIsValid(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             when(newsService.read(commentRequestDto.getNewsId())).thenReturn(new News());
             when(commentRepository.save(any(Comment.class))).thenReturn(builderCreateComment);
@@ -100,7 +100,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldSearchCommentsWhenSearchCommentsHasParameterQuery(CommentRequestDto commentRequestDto) {
+        void shouldSearchCommentsWhenSearchCommentsHasParameterQuery(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             List<Comment> listComment = new ArrayList<>();
            listComment.add(builderCreateComment);
@@ -116,7 +116,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldSearchCommentsWhenSearchCommentsHasParameterData(CommentRequestDto commentRequestDto) {
+        void shouldSearchCommentsWhenSearchCommentsHasParameterData(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             List<Comment> listComment = new ArrayList<>();
             listComment.add(builderCreateComment);
@@ -133,7 +133,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldReadAllWhenCommentsIsValid(CommentRequestDto commentRequestDto) {
+        void shouldReadAllWhenCommentsIsValid(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             List<Comment> listComment = new ArrayList<>();
             listComment.add(builderCreateComment);
@@ -149,7 +149,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testUpdateWithValidAuthorName(CommentRequestDto commentRequestDto) {
+        void testUpdateWithValidAuthorName(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             builderCreateComment.setUsername(authentication.getName());
@@ -163,7 +163,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testUpdateWithInvalidAuthorName(CommentRequestDto commentRequestDto) {
+        void testUpdateWithInvalidAuthorName(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             builderCreateComment.setUsername("admin");
             when(commentRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.of( builderCreateComment));
@@ -175,7 +175,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testDeleteWithValidAuthorName(CommentRequestDto commentRequestDto) {
+        void testDeleteWithValidAuthorName(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             builderCreateComment.setUsername(authentication.getName());
@@ -190,7 +190,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testDeleteWithInvalidAuthorName(CommentRequestDto commentRequestDto) {
+        void testDeleteWithInvalidAuthorName(CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Comment builderCreateComment = builderCreateComment(commentRequestDto);
             builderCreateComment.setUsername(RequestName.ADMIN.getValue());
             when(commentRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.of( builderCreateComment));
@@ -202,7 +202,7 @@ public class CommentsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          * @return the created Comment object
          */
-        private Comment builderCreateComment(CommentRequestDto commentRequestDto){
+        private Comment builderCreateComment(CommentRequestProtos.CommentRequestDto commentRequestDto){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             LocalDateTime now = LocalDateTime.now().withNano(0);
             return Comment.builder()

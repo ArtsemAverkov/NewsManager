@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.clevertec.NewsManager.dto.request.UserRequestProtos;
 import ru.clevertec.NewsManager.repository.UserManagementClient;
+import ru.clevertec.exceptionhandlerspringbootstarter.EnableExceptionHandling;
 
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
+@EnableExceptionHandling
 public class UserController {
    private final UserManagementClient userManagementClient;
 

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.service.comment.CommentService;
+import ru.clevertec.controllerlogspringbootstarter.aop.loger.IncludeLog;
+import ru.clevertec.exceptionhandlerspringbootstarter.EnableExceptionHandling;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,6 +32,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/comment")
 @RequiredArgsConstructor
+@EnableExceptionHandling
+@IncludeLog
 public class CommentController {
 
     private final CommentService commentService;
@@ -102,6 +106,7 @@ public class CommentController {
      * @param pageable the Pageable object for pagination
      * @return the list of comments
      */
+
 
     @GetMapping
     public List<Comment> readAll(@PageableDefault Pageable pageable){

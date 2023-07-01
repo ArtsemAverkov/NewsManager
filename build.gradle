@@ -21,6 +21,7 @@ configurations {
 repositories {
 	gradlePluginPortal()
 	mavenCentral()
+	mavenLocal()
 }
 
 
@@ -53,7 +54,8 @@ dependencies {
 	runtimeOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.22.2'
 	implementation group: 'com.hubspot.jackson', name: 'jackson-datatype-protobuf', version: '0.9.13'
 
-
+	implementation group: 'ru.clevertec', name: 'controller-log-spring-boot-starter', version: '0.1.1'
+	implementation group: 'ru.clevertec', name: 'exception-handler-spring-boot-starter', version: '0.2.1'
 
 	runtimeOnly 'org.postgresql:postgresql'
 

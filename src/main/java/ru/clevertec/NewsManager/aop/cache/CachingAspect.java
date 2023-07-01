@@ -33,13 +33,12 @@ public class CachingAspect  {
      * Intercepts the execution of methods annotated with @Cacheable and applies caching logic.
      *
      * @param joinPoint  the join point for the intercepted method
-     * @param cacheable  the @Cacheable annotation applied to the method
      * @return the cached value or the result of the method invocation
      * @throws Throwable if an exception occurs during method execution
      */
 
     @Around("@annotation(cacheable)")
-    public Object cache(ProceedingJoinPoint joinPoint, org.springframework.cache.annotation.Cacheable cacheable) throws Throwable {
+    public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
         CacheI<String, Object> cache = caches.computeIfAbsent("myCaches",
                 k -> cacheFactory.createCache());
         switch (joinPoint.getSignature().getName()) {

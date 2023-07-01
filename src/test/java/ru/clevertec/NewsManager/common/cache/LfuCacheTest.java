@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import ru.clevertec.NewsManager.aop.cache.LfuCache;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsRequestDto;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,7 +23,7 @@ public class LfuCacheTest {
      * @param commentRequestDto the CommentRequestDto object to be used for testing
      */
     @Test
-    void testPutAndGet(CommentRequestDto commentRequestDto) {
+    void testPutAndGet(CommentRequestProtos.CommentRequestDto commentRequestDto) {
         LfuCache<Object, Object> objectObjectLfuCache = new LfuCache<>(1);
         objectObjectLfuCache.put(commentRequestDto.getNewsId(),commentRequestDto);
         Object o = objectObjectLfuCache.get(commentRequestDto.getNewsId());
@@ -37,7 +37,7 @@ public class LfuCacheTest {
      * @param commentRequestDto the CommentRequestDto object to be used for testing
      */
     @Test
-    void testRemove(CommentRequestDto commentRequestDto) {
+    void testRemove(CommentRequestProtos.CommentRequestDto commentRequestDto) {
         LfuCache<Object, Object> objectObjectLfuCache = new LfuCache<>(1);
         objectObjectLfuCache.put(commentRequestDto.getNewsId(),commentRequestDto);
         objectObjectLfuCache.remove(commentRequestDto.getNewsId());
@@ -52,7 +52,7 @@ public class LfuCacheTest {
      * @param commentRequestDto the CommentRequestDto object to be used for testing
      */
     @Test
-    void testPutValueShouldNotBeAvailableByKeySizeIsGreaterThanCapacity(CommentRequestDto commentRequestDto) {
+    void testPutValueShouldNotBeAvailableByKeySizeIsGreaterThanCapacity(CommentRequestProtos.CommentRequestDto commentRequestDto) {
         LfuCache<Object, Object> objectObjectLfuCache = new LfuCache<>(1);
         objectObjectLfuCache.put(commentRequestDto.getNewsId(),commentRequestDto);
         objectObjectLfuCache.put(2,commentRequestDto);

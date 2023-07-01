@@ -26,10 +26,10 @@ public class WireMockInitializer {
         wireMockServer = new WireMockServer(wireMockConfig);
         wireMockServer.start();
 
-        wireMockServer.stubFor(get(urlEqualTo("/news-api/test"))
+        wireMockServer.stubFor(get(urlEqualTo("/news-api/prod"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
-                        .withBodyFile("news-api.json")));
+                        .withBodyFile("news-api-prod.json")));
     }
 
     /**
