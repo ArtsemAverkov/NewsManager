@@ -61,9 +61,6 @@ public class CommentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    /**
-     * Method executed before running all the tests.
-     */
     @BeforeAll
     static void setup() {
         WireMockInitializer.setup();

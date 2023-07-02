@@ -11,7 +11,7 @@ plugins {
 apply from: 'library.gradle'
 
 group = 'ru.clevertec'
-version = '0.1.5-SNAPSHOT'
+version = '0.1.7-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
