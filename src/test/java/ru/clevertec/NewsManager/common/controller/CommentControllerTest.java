@@ -64,7 +64,6 @@ public class CommentControllerTest {
     /**
      * Method executed before running all the tests.
      */
-
     @BeforeAll
     static void setup() {
         WireMockInitializer.setup();
@@ -80,7 +79,6 @@ public class CommentControllerTest {
      * @param commentRequestDto the comment request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void create(CommentRequestProtos.CommentRequestDto commentRequestDto) throws Exception {
         when(commentService.create(any(CommentRequestProtos.CommentRequestDto.class))).thenReturn(RequestId.VALUE_1.getValue());
@@ -115,7 +113,6 @@ public class CommentControllerTest {
      * Test for deleting a comment.
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void delete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/comment/{id}", RequestId.VALUE_1.getValue())
@@ -130,7 +127,6 @@ public class CommentControllerTest {
      * @param commentRequestDto the comment request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void read(CommentRequestProtos.CommentRequestDto commentRequestDto) throws Exception {
         Comment comment = builderComment(commentRequestDto);
@@ -150,7 +146,6 @@ public class CommentControllerTest {
      * @param commentRequestDto the comment request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void searchComments(CommentRequestProtos.CommentRequestDto commentRequestDto) throws Exception {
         Comment comment = builderComment(commentRequestDto);
@@ -176,7 +171,6 @@ public class CommentControllerTest {
      * @param commentRequestDto the comment request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void readAll(CommentRequestProtos.CommentRequestDto commentRequestDto) throws Exception {
         Comment comment = builderComment(commentRequestDto);

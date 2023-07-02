@@ -31,18 +31,13 @@ class CachingAspectTest {
     @InjectMocks
     private CachingAspect cachingAspect;
 
-    // A mock cache object for testing
     private CacheI cache;
 
-    // A mock join point object for testing
     private ProceedingJoinPoint joinPoint;
 
-    // A mock signature object for testing
     private Signature signature;
 
     /**
-
-     ⦁
      Sets up the test by initializing mock objects.
      */
     @BeforeEach
@@ -56,10 +51,7 @@ class CachingAspectTest {
     }
 
     /**
-
-     ⦁
      Tests the {@link CachingAspect#cache(ProceedingJoinPoint)} method for cache read operation.
-     ⦁
      @throws Throwable if an error occurs during the test
      */
     @Test
@@ -77,10 +69,7 @@ class CachingAspectTest {
     }
 
     /**
-
-     ⦁
      Tests the {@link CachingAspect#cache(ProceedingJoinPoint)} method for cache create operation.
-     ⦁
      @throws Throwable if an error occurs during the test
      */
     @Test
@@ -98,10 +87,7 @@ class CachingAspectTest {
     }
 
     /**
-
-     ⦁
      Tests the {@link CachingAspect#cache(ProceedingJoinPoint)} method for cache delete operation.
-     ⦁
      @throws Throwable if an error occurs during the test
      */
     @Test
@@ -121,10 +107,7 @@ class CachingAspectTest {
     }
 
     /**
-
-     ⦁
      Tests the {@link CachingAspect#cache(ProceedingJoinPoint)} method for cache update operation.
-     ⦁
      @throws Throwable if an error occurs during the test
      */
     @Test

@@ -7,7 +7,16 @@ import ru.clevertec.NewsManager.entity.user.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The UserTest class is a test class for the User entity.
+ * It tests the constructors, builder, setter methods of the User class.
+ */
 public class UserTest {
+
+    /**
+     * Tests the User class's constructor with all arguments.
+     * It verifies that the User is created with the correct values.
+     */
     @Test
     void shouldCreateUserWithAllArgsConstructor() {
 
@@ -19,6 +28,10 @@ public class UserTest {
         assertThat(user.getRole()).isEqualTo(new Role(1L, RequestName.ADMIN.getValue()));
     }
 
+    /**
+     * Tests the User class's constructor with username, password, and role arguments.
+     * It verifies that the User is created with the correct values.
+     */
     @Test
     void shouldCreateUserWithUsernamePasswordRoleConstructor() {
         User user = new User("admin", "secret", new Role(1L, RequestName.ADMIN.getValue()));
@@ -29,6 +42,10 @@ public class UserTest {
         assertThat(user.getRole()).isEqualTo(new Role(1L, RequestName.ADMIN.getValue()));
     }
 
+    /**
+     * Tests the User class's default constructor.
+     * It verifies that the User is created with null values.
+     */
     @Test
     void shouldCreateUserWithNoArgsConstructor() {
         User user = new User();
@@ -39,6 +56,10 @@ public class UserTest {
         assertThat(user.getRole()).isNull();
     }
 
+    /**
+     * Tests the User class's builder.
+     * It verifies that the User is created with the correct values using the builder pattern.
+     */
     @Test
     void shouldCreateUserWithBuilder() {
         User user = User.builder()
@@ -54,6 +75,10 @@ public class UserTest {
         assertThat(user.getRole()).isEqualTo(new Role(1L, RequestName.ADMIN.getValue()));
     }
 
+    /**
+     * Tests the setter methods of the User class.
+     * It verifies that the User's fields are set correctly.
+     */
     @Test
     void shouldSetUserFields() {
         User user = new User();

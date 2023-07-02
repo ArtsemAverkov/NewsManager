@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface NewsService {
-    long create(NewsRequestProtos.NewsRequestDto news);
+    Long  create(NewsRequestProtos.NewsRequestDto news);
     News read (long id);
     void update (NewsRequestProtos.NewsRequestDto news, Long id);
     void delete (Long id);

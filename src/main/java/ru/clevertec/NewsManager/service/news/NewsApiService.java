@@ -28,10 +28,9 @@ import static ru.clevertec.NewsManager.builder.NewsBuilder.buildNewsResp;
  The NewsApiService class implements the NewsService interface and provides
  the functionality to manage news in the NewsManager application.
  */
-
 @Service
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "newsCash")
+@CacheConfig(cacheNames = "newsCache")
 public class NewsApiService implements NewsService {
 
     private final NewsRepository newsRepository;
@@ -41,10 +40,9 @@ public class NewsApiService implements NewsService {
      @param news the news request DTO
      @return the ID of the created news
      */
-
-    @CachePut(value = "news", key = "#result.id")
+    @CachePut(value = "newsCache", key = "#result")
     @Override
-    public long create(NewsRequestProtos.NewsRequestDto news) {
+    public Long create(NewsRequestProtos.NewsRequestDto news) {
         News buildCreateNews = NewsBuilder.buildCreateNews(news);
         return newsRepository.save(buildCreateNews).getId();
     }
@@ -55,8 +53,7 @@ public class NewsApiService implements NewsService {
      @return the retrieved news
      @throws IllegalArgumentException if the news ID is invalid
      */
-
-    @Cacheable(value = "news", key = "#id", unless = "#result == null")
+    @Cacheable(cacheNames = "newsCache", key = "#id", unless = "#result == null")
     @Override
     public News read(long id) {
         return newsRepository.findById(id).orElseThrow(()->
@@ -68,7 +65,6 @@ public class NewsApiService implements NewsService {
      @return the news response DTO with associated comments
       * @param id the ID of the news
      */
-
     @Override
     public NewsResponseProtos.NewsResponseDto readNewsWithComments(Long id){
         read(id);
@@ -82,7 +78,6 @@ public class NewsApiService implements NewsService {
       * @param query the search query
      * @param date the search date
      */
-
     public List<NewsResponseProtos.NewsResponseDto> searchNews(String query, LocalDateTime date) {
         if (Objects.nonNull(query)){
             return NewsBuilder.buildNewsResponseList(newsRepository.searchNewsByQuery(query));
@@ -96,17 +91,17 @@ public class NewsApiService implements NewsService {
      @param id the ID of the news to update
      @throws AccessDeniedException if the current user is not the author of the news
      */
-
-    @CachePut(value = "news", key = "#id")
+    @CacheEvict(value = "newsCache", key = "#id")
+    @CachePut(value = "newsCache", key = "#id")
     @Override
     @Transactional
     public void update(NewsRequestProtos.NewsRequestDto news, Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         News readNews = read(id);
         if (readNews.getAuthor().equals(authentication.getName())) {
-            readNews.setId(id);
             LocalDateTime timeCreateNews = readNews.getTime();
             News buildUpdateNews = NewsBuilder.buildUpdateNews(news, timeCreateNews);
+            buildUpdateNews.setId(id);
             newsRepository.save(buildUpdateNews);
         } else {
             throw new AccessDeniedException(
@@ -119,8 +114,7 @@ public class NewsApiService implements NewsService {
      @param id the ID of the news to delete
      @throws AccessDeniedException if the current user is not the author of the news
      */
-
-    @CacheEvict(value = "news", key = "#id")
+    @CacheEvict(value = "newsCache", key = "#id")
     @Override
     @Transactional
     public void delete(Long id) {
@@ -139,9 +133,6 @@ public class NewsApiService implements NewsService {
      @param pageable the pagination information
      @return the list of retrieved news response DTOs
      */
-
-
-    @Cacheable(cacheNames = "newsCash")
     @Override
     public List<News> readAll(Pageable pageable) {
         return newsRepository.findAll(pageable).getContent();

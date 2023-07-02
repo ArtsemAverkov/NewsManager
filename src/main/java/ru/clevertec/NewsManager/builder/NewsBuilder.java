@@ -21,11 +21,9 @@ public class NewsBuilder {
 
     /**
      * Builds a list of NewsResponseDto objects from a list of News entities.
-     *
      * @param newsList the list of News entities
      * @return the list of NewsResponseDto objects
      */
-
     public static List<NewsResponseProtos.NewsResponseDto> buildNewsResponseList(List<News> newsList) {
         List<NewsResponseProtos.NewsResponseDto> newsResponseDtoList = new ArrayList<>();
         for (News news : newsList) {
@@ -35,6 +33,12 @@ public class NewsBuilder {
         return newsResponseDtoList;
     }
 
+    /**
+     The buildCommentResponse method is used to build a CommentResponseDto object based on a Comment object.
+     It takes a Comment object as input and returns the corresponding CommentResponseDto object.
+     @param comment The Comment object to build the CommentResponseDto for.
+     @return The CommentResponseDto object constructed from the Comment object.
+     */
     public static CommentResponseProtos.CommentResponseDto buildCommentResponse(Comment comment) {
         return CommentResponseProtos.CommentResponseDto.newBuilder()
                 .setId(comment.getId())
@@ -50,7 +54,6 @@ public class NewsBuilder {
      * @param newsRequestDto the NewsRequestDto containing the news details
      * @return the built News object
      */
-
     public static News buildCreateNews(NewsRequestProtos.NewsRequestDto newsRequestDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LocalDateTime now = LocalDateTime.now();
@@ -64,12 +67,10 @@ public class NewsBuilder {
 
     /**
      * Builds a new News object for updating a news.
-     *
      * @param newsRequestDto the NewsRequestDto containing the updated news details
      * @param time           the LocalDateTime representing the updated time of the news
      * @return the built News object
      */
-
     public static News buildUpdateNews(NewsRequestProtos.NewsRequestDto newsRequestDto, LocalDateTime time) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return News.builder()
@@ -80,7 +81,12 @@ public class NewsBuilder {
                 .build();
     }
 
-
+    /**
+     The buildNewsResp method is used to build a NewsResponseDto object based on a News object.
+     It takes a News object as input and returns the corresponding NewsResponseDto object.
+     @param news The News object to build the NewsResponseDto for.
+     @return The NewsResponseDto object constructed from the News object.
+     */
     public static NewsResponseProtos.NewsResponseDto buildNewsResp(News news) {
         List<CommentResponseProtos.CommentResponseDto> commentResponseDtoList = new ArrayList<>();
         for (Comment comment : news.getComment()) {

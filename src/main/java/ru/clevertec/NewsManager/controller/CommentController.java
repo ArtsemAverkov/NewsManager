@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,6 @@ public class CommentController {
      * @param comment the CommentRequestDto containing the comment details
      * @return the ID of the created comment
      */
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Long create(@RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
@@ -55,7 +55,6 @@ public class CommentController {
      * @param id the ID of the comment
      * @return the Comment object
      */
-
     @Transactional
     @GetMapping(value= "/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -69,7 +68,6 @@ public class CommentController {
      * @param id      the ID of the comment to update
      * @param comment the CommentRequestDto containing the updated comment details
      */
-
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
@@ -80,7 +78,6 @@ public class CommentController {
      * Deletes a comment by its ID.
      * @param id the ID of the comment to delete
      */
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable @Valid Long id){
@@ -93,7 +90,6 @@ public class CommentController {
      * @param date  the date to filter the comments
      * @return the list of matching comments
      */
-
     @GetMapping(value = "/search")
     @ResponseStatus(HttpStatus.OK)
     public List<Comment> searchComments(@RequestParam(required = false) String query,
@@ -106,8 +102,6 @@ public class CommentController {
      * @param pageable the Pageable object for pagination
      * @return the list of comments
      */
-
-
     @GetMapping
     public List<Comment> readAll(@PageableDefault Pageable pageable){
         return commentService.readAll(pageable);

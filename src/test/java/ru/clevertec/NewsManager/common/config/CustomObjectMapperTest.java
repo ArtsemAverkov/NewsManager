@@ -8,30 +8,36 @@ import ru.clevertec.NewsManager.config.CustomObjectMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ The CustomObjectMapperTest class is a test class for the CustomObjectMapper class.
+ It tests the serialization and deserialization of UnknownFieldSet using the custom ObjectMapper.
+ */
 public class CustomObjectMapperTest {
 
     private ObjectMapper objectMapper;
 
+    /**
+     Sets up the test by creating the custom ObjectMapper instance.
+     */
     @BeforeEach
     void setUp() {
         objectMapper = CustomObjectMapper.createObjectMapper();
     }
 
+    /**
+     Tests the serialization and deserialization of UnknownFieldSet.
+     @throws Exception if an error occurs during the test execution.
+     */
     @Test
     void shouldSerializeAndDeserializeUnknownFieldSet() throws Exception {
-// Create an UnknownFieldSet object with some fields
         UnknownFieldSet unknownFieldSet = UnknownFieldSet.newBuilder()
                 .addField(1, UnknownFieldSet.Field.newBuilder().addVarint(42).build())
                 .addField(2, UnknownFieldSet.Field.newBuilder().addFixed32(123).build())
                 .build();
 
-// Serialize the object to JSON
         String json = objectMapper.writeValueAsString(unknownFieldSet);
-
-// Deserialize the JSON back to an object
         UnknownFieldSet deserialized = objectMapper.readValue(json, UnknownFieldSet.class);
 
-// Assert that the deserialized object is equal to the original one
         assertThat(deserialized).isEqualTo(unknownFieldSet);
     }
 }

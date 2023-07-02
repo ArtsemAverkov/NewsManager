@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="insertNews" author="ArtemAverkov">
+        <insert tableName="news">
+            <column name="time" value="2023-05-26"/>
+            <column name="title" value="Technology Advancements in Artificial Intelligence"/>
+            <column name="text" value="Artificial intelligence has made significant progress in recent years, with advancements in deep learning and neural networks."/>
+            <column name="author" value="Artsem"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-06-01"/>
+            <column name="title" value="Exploring the Benefits of Renewable Energy Sources"/>
+            <column name="text" value="Renewable energy sources such as solar and wind power offer numerous environmental and economic benefits."/>
+            <column name="author" value="Artsem"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-06-10"/>
+            <column name="title" value="The Rise of E-commerce and its Impact on Traditional Retailers"/>
+            <column name="text" value="The increasing popularity of online shopping has posed challenges for brick-and-mortar retailers."/>
+            <column name="author" value="Artsem"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-06-15"/>
+            <column name="title" value="Global Efforts to Combat Climate Change"/>
+            <column name="text" value="Countries around the world are taking steps to reduce greenhouse gas emissions and mitigate the effects of climate change."/>
+            <column name="author" type="Artsem"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-06-20"/>
+            <column name="title" value="Advancements in Medical Research for Disease Treatment"/>
+            <column name="text" value="Scientists and researchers are making progress in developing new treatments and therapies for various diseases."/>
+            <column name="author" value="Andrei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-06-25"/>
+            <column name="title" value="The Impact of Social Media on Society"/>
+            <column name="text" value="Social media platforms have transformed the way we communicate and interact with others."/>
+            <column name="author" value="Andrei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-01"/>
+            <column name="title" value="Space Exploration and Discoveries"/>
+            <column name="text" value="Exploration of outer space has led to significant discoveries and advancements in our understanding of the universe."/>
+            <column name="author" value="Andrei"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-06"/>
+            <column name="title" value="The Growing Importance of Cybersecurity"/>
+            <column name="text" value="As technology becomes more integrated into our lives, the need for strong cybersecurity measures is paramount."/>
+            <column name="author" value="Andrei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-11"/>
+            <column name="title" value="Advancements in Autonomous Vehicles"/>
+            <column name="text" value="Self-driving cars and autonomous vehicles are poised to revolutionize the transportation industry."/>
+            <column name="author" value="Vlad"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-16"/>
+            <column name="title" value="The Future of Work: Automation and Job Market Trends"/>
+            <column name="text" value="Automation technologies are reshaping the job market and requiring workers to adapt to new skills and roles."/>
+            <column name="author" value="Vlad"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-21"/>
+            <column name="title" value="The Benefits of Exercise for Physical and Mental Health"/>
+            <column name="text" value="Regular exercise has numerous health benefits, including improved physical fitness and mental well-being."/>
+            <column name="author" value="Vlad"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-07-26"/>
+            <column name="title" value="The Impact of Artificial Intelligence on Job Automation"/>
+            <column name="text" value="AI technologies are automating routine tasks, raising questions about the future of employment."/>
+            <column name="author" value="Vlad"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-01"/>
+            <column name="title" value="The Role of Blockchain in Financial Transactions"/>
+            <column name="text" value="Blockchain technology has the potential to revolutionize financial transactions, offering enhanced security and transparency."/>
+            <column name="author" value="Aleksei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-06"/>
+            <column name="title" value="The Evolution of Gaming: Virtual Reality and Augmented Reality"/>
+            <column name="text" value="VR and AR technologies are transforming the gaming industry, creating immersive and interactive experiences."/>
+            <column name="author" value="Aleksei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-11"/>
+            <column name="title" value="The Rise of Remote Work and Digital Nomadism"/>
+            <column name="text" value="Advancements in technology and changing work cultures have enabled more people to work remotely and embrace a digital nomad lifestyle."/>
+            <column name="author" value="Dmintriy"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-16"/>
+            <column name="title" value="The Future of Healthcare: Telemedicine and Remote Patient Monitoring"/>
+            <column name="text" value="Telemedicine and remote patient monitoring technologies are revolutionizing healthcare delivery, improving access and efficiency."/>
+            <column name="author" value="Aleksei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-21"/>
+            <column name="title" value="The Impact of Climate Change on Natural Disasters"/>
+            <column name="text" value="Climate change is contributing to the frequency and intensity of natural disasters such as hurricanes, floods, and wildfires."/>
+            <column name="author" value="Aleksei"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-08-26"/>
+            <column name="title" value="The Role of Artificial Intelligence in Healthcare"/>
+            <column name="text" value="AI applications in healthcare include diagnosis assistance, drug discovery, and personalized treatment plans."/>
+            <column name="author" value="Dmintriy"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-09-01"/>
+            <column name="title" value="The Future of Space Travel: Mars Colonization and Interplanetary Exploration"/>
+            <column name="text" value="Space agencies and private companies are working towards establishing human colonies on Mars and exploring other planets."/>
+            <column name="author" value="Dmintriy"/>
+        </insert>
+
+
+        <insert tableName="news">
+            <column name="time" value="2023-09-06"/>
+            <column name="title" value="The Promise of Quantum Computing"/>
+            <column name="text" value="Quantum computers have the potential to solve complex problems at a much faster rate than traditional computers."/>
+            <column name="author" value="Dmintriy"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertComment" author="ArtemAverkov">
+        <insert tableName="comment">
+            <column name="time" value="2023-06-01"/>
+            <column name="text" value="Great news! Can't wait to see how this new technology unfolds."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="comment">
+            <column name="time" value="2023-06-02"/>
+            <column name="text" value="I'm glad to see progress being made in this field. Exciting times ahead!"/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="1"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-03"/>
+            <column name="text" value="This is a crucial development for our society. Kudos to the team behind it!"/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="2"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-04"/>
+            <column name="text" value="I'm impressed by the innovative approach taken in this project."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="2"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-05"/>
+            <column name="text" value="This news brings a smile to my face. It's heartwarming to see such positive initiatives."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="3"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-06"/>
+            <column name="text" value="I'm inspired by the dedication and passion of the people involved in this project."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="3"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-07"/>
+            <column name="text" value="This news raises important questions and sparks an important conversation."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="4"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-08"/>
+            <column name="text" value="I appreciate the effort put into shedding light on this topic. It's enlightening."/>
+            <column name="username" value="DmitriyBR"/>
+            <column name="news_id" valueNumeric="4"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-09"/>
+            <column name="text" value="This news reminds us of the importance of preserving our natural resources."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="5"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-10"/>
+            <column name="text" value="I'm glad to see initiatives like this that prioritize sustainability."/>
+            <column name="username" value="DmitriyBR"/>
+            <column name="news_id" valueNumeric="5"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-11"/>
+            <column name="text" value="The future is here! Can't wait to witness the impact of this breakthrough."/>
+            <column name="username" value="DenisBA"/>
+            <column name="news_id" valueNumeric="6"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-12"/>
+            <column name="text" value="I'm curious to see how this technology will shape various industries."/>
+            <column name="username" value="VladimirGA"/>
+            <column name="news_id" valueNumeric="6"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-13"/>
+            <column name="text" value="Incredible news! This will revolutionize the way we live and work."/>
+            <column name="username" value="DenisBA"/>
+            <column name="news_id" valueNumeric="7"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-14"/>
+            <column name="text" value="I'm excited to see the impact this will have on various industries."/>
+            <column name="username" value="VladimirGA"/>
+            <column name="news_id" valueNumeric="7"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-15"/>
+            <column name="text" value="This news opens up new possibilities and challenges our imagination."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="8"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-16"/>
+            <column name="text" value="I'm fascinated by the potential applications of this discovery."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="8"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-17"/>
+            <column name="text" value="This is a significant milestone in the field of medicine. Kudos to the researchers."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="9"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-18"/>
+            <column name="text" value="I'm hopeful that this breakthrough will lead to improved treatments."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="9"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-19"/>
+            <column name="text" value="Incredible work! This art piece is thought-provoking and visually stunning."/>
+            <column name="username" value="DmintriyBR"/>
+            <column name="news_id" valueNumeric="10"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-20"/>
+            <column name="text" value="I'm impressed by the artist's creativity and attention to detail."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="10"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-21"/>
+            <column name="text" value="This news highlights the importance of social responsibility."/>
+            <column name="username" value="DmintriyBR"/>
+            <column name="news_id" valueNumeric="11"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-22"/>
+            <column name="text" value="I'm inspired by the positive impact this initiative will have on the community."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="11"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-23"/>
+            <column name="text" value="This news sheds light on an important issue that needs immediate attention."/>
+            <column name="username" value="DenisBA"/>
+            <column name="news_id" valueNumeric="12"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-24"/>
+            <column name="text" value="I appreciate the efforts made to raise awareness about this cause."/>
+            <column name="username" value="AntonKA"/>
+            <column name="news_id" valueNumeric="12"/>
+        </insert>
+
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-25"/>
+            <column name="text" value="This news showcases the power of collaboration and teamwork."/>
+            <column name="username" value="DenisBA"/>
+            <column name="news_id" valueNumeric="13"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-26"/>
+            <column name="text" value="I'm impressed by the collective effort that went into making this project a success."/>
+            <column name="username" value="AntonKA"/>
+            <column name="news_id" valueNumeric="13"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-27"/>
+            <column name="text" value="This news brings hope for a better future. Let's work together to make it a reality."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="14"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-28"/>
+            <column name="text" value="I'm inspired by the resilience and determination shown in this project."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="14"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-29"/>
+            <column name="text" value="This news highlights the importance of education and access to knowledge."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="15"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-06-30"/>
+            <column name="text" value="I'm glad to see efforts being made to bridge the education gap."/>
+            <column name="username" value="AndreiMK"/>
+            <column name="news_id" valueNumeric="15"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-01"/>
+            <column name="text" value="This news reflects the power of resilience and determination in overcoming challenges."/>
+            <column name="username" value="AntonKA"/>
+            <column name="news_id" valueNumeric="16"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-02"/>
+            <column name="text" value="I'm inspired by the individuals who never gave up on their dreams."/>
+            <column name="username" value="DmintriyBR"/>
+            <column name="news_id" valueNumeric="16"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-03"/>
+            <column name="text" value="This news highlights the positive impact of art and culture on society."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="17"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-04"/>
+            <column name="text" value="I'm amazed by the creativity and talent showcased in this project."/>
+            <column name="username" value="DmintriyBR"/>
+            <column name="news_id" valueNumeric="17"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-05"/>
+            <column name="text" value="This news reminds us of the importance of mental health and well-being."/>
+            <column name="username" value="VladKN"/>
+            <column name="news_id" valueNumeric="18"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-06"/>
+            <column name="text" value="I appreciate the efforts made to raise awareness and support for mental health."/>
+            <column name="username" value="DmintriyBR"/>
+            <column name="news_id" valueNumeric="18"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-07"/>
+            <column name="text" value="This news shines a light on the need for sustainable practices in our daily lives."/>
+            <column name="username" value="VladimirGA"/>
+            <column name="news_id" valueNumeric="19"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-08"/>
+            <column name="text" value="I'm inspired to adopt more sustainable habits after reading this article."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="19"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-09"/>
+            <column name="text" value="This news showcases the power of community and the positive change it can bring."/>
+            <column name="username" value="VladimirGA"/>
+            <column name="news_id" valueNumeric="20"/>
+        </insert>
+
+        <insert tableName="comment">
+            <column name="time" value="2023-07-10"/>
+            <column name="text" value="I'm inspired to get involved and make a difference in my own community."/>
+            <column name="username" value="ArtsemAA"/>
+            <column name="news_id" valueNumeric="20"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

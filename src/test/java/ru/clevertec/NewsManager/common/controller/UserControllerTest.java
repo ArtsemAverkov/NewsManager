@@ -18,9 +18,7 @@ import ru.clevertec.NewsManager.NewsManagerApplication;
 import ru.clevertec.NewsManager.common.WireMockInitializer;
 import ru.clevertec.NewsManager.common.utill.RequestId;
 import ru.clevertec.NewsManager.common.utill.RequestName;
-import ru.clevertec.NewsManager.controller.NewsController;
 import ru.clevertec.NewsManager.controller.UserController;
-import ru.clevertec.NewsManager.dto.request.NewsRequestProtos;
 import ru.clevertec.NewsManager.dto.request.UserRequestProtos;
 import ru.clevertec.NewsManager.repository.UserManagementClient;
 import ru.clevertec.NewsManager.security.JwtTokenGenerator;
@@ -34,6 +32,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.clevertec.NewsManager.common.utill.CommentBuilder.createUserDetails;
 
+/**
+ The UserControllerTest class is a test class for the UserController class.
+ It tests the create() and delete() methods of the UserController using MockMvc.
+ */
 @ContextConfiguration(classes = NewsManagerApplication.class)
 @WebMvcTest({UserController.class, SecurityConfig.class, JwtTokenGenerator.class})
 @AutoConfigureMockMvc
@@ -46,16 +48,26 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     Sets up the test by initializing WireMock.
+     */
     @BeforeAll
     static void setup() {
         WireMockInitializer.setup();
     }
 
+    /**
+     Tears down the test by cleaning up WireMock.
+     */
     @AfterAll
     static void teardown() {
         WireMockInitializer.teardown();
     }
 
+    /**
+     Tests the create() method of the UserController.
+     @throws Exception if an error occurs during the test execution.
+     */
     @Test
     public void create() throws Exception {
         when(userManagementClient.create(any(UserRequestProtos.UserRequestDto.class)))
@@ -76,6 +88,10 @@ public class UserControllerTest {
         SecurityContextHolder.clearContext();
     }
 
+    /**
+     Tests the delete() method of the UserController.
+     @throws Exception if an error occurs during the test execution.
+     */
     @Test
     public void delete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/users/{name}", RequestName.USERNAME.getValue())

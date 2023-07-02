@@ -8,8 +8,10 @@ plugins {
 	id "com.google.protobuf" version "0.9.3"
 }
 
+apply from: 'library.gradle'
+
 group = 'ru.clevertec'
-version = '0.0.8-SNAPSHOT'
+version = '0.1.5-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -25,60 +27,6 @@ repositories {
 }
 
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.security:spring-security-config'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.9.1'
-
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-
-	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
-
-	implementation group: 'redis.clients', name: 'jedis', version: '4.4.1'
-
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
-	implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-client', version: '4.0.3'
-	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-	implementation group: 'org.springframework', name: 'spring-webflux', version: '6.0.9'
-	implementation group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.1.7'
-
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-
-	implementation 'com.google.protobuf:protobuf-java:3.22.2'
-	runtimeOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.22.2'
-	implementation group: 'com.hubspot.jackson', name: 'jackson-datatype-protobuf', version: '0.9.13'
-
-	implementation group: 'ru.clevertec', name: 'controller-log-spring-boot-starter', version: '0.1.1'
-	implementation group: 'ru.clevertec', name: 'exception-handler-spring-boot-starter', version: '0.2.1'
-
-	runtimeOnly 'org.postgresql:postgresql'
-
-	implementation 'io.github.openfeign:feign-core'
-	implementation 'io.github.openfeign:feign-slf4j'
-
-	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.22.0'
-	implementation group: 'org.liquibase', name: 'liquibase-groovy-dsl', version: '3.0.3'
-
-	implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '3.1.0'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation group: 'com.github.tomakehurst', name: 'wiremock', version: '3.0.0-beta-10'
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-	testImplementation 'org.mockito:mockito-core:5.2.0'
-	testImplementation 'org.junit.platform:junit-platform-runner:1.9.2'
-	testImplementation 'org.testcontainers:junit-jupiter:1.18.1'
-	testImplementation 'org.testcontainers:postgresql:1.18.1'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-}
 
 asciidoctor {
 	sourceDir file('src/docs/asciidoc')

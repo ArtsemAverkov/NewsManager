@@ -40,7 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -76,7 +77,6 @@ public class NewsControllerTest {
      * @param newsRequestDto the news request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void create(NewsRequestProtos.NewsRequestDto newsRequestDto) throws Exception {
         when(newsServiceService.create(any(NewsRequestProtos.NewsRequestDto.class))).thenReturn(RequestId.VALUE_1.getValue());
@@ -95,7 +95,6 @@ public class NewsControllerTest {
      * @param newsRequestDto the news request DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void update(NewsRequestProtos.NewsRequestDto newsRequestDto) throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.patch("/news/{id}", RequestId.VALUE_1.getValue())
@@ -111,7 +110,6 @@ public class NewsControllerTest {
      * Test for deleting a news.
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void delete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/news/{id}", RequestId.VALUE_1.getValue())
@@ -126,7 +124,6 @@ public class NewsControllerTest {
      * @param newsResponseDto the news response DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void readWithComments(NewsResponseProtos.NewsResponseDto newsResponseDto) throws Exception {
         when(newsServiceService.readNewsWithComments(RequestId.VALUE_1.getValue())).thenReturn(newsResponseDto);
@@ -146,7 +143,6 @@ public class NewsControllerTest {
      * @param newsResponseDto the news response DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void searchNews(NewsResponseProtos.NewsResponseDto newsResponseDto) throws Exception {
         List<NewsResponseProtos.NewsResponseDto> newsResponseDtoList = new ArrayList<>();
@@ -169,7 +165,6 @@ public class NewsControllerTest {
      * @param newsRequestDto the news response DTO object
      * @throws Exception if an exception occurs during the test
      */
-
     @Test
     public void readAll(NewsRequestProtos.NewsRequestDto newsRequestDto) throws Exception {
         List<News> newsList = new ArrayList<>();
@@ -193,7 +188,6 @@ public class NewsControllerTest {
      * @param newsRequestDto the news request DTO object
      * @return the JSON content as a string
      */
-
     @NotNull
     private String getContent(NewsRequestProtos.NewsRequestDto newsRequestDto) {
         return "{\n" +
@@ -206,7 +200,6 @@ public class NewsControllerTest {
      * Creates and returns a user details object for testing.
      * @return the user details object
      */
-
     private UserDetails createUserDetails(){
         return User.withUsername("username")
                 .password("password")

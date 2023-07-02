@@ -6,18 +6,27 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+/**
+ The RedisConfig class provides configuration for Redis in the NewsManager application.
+ It defines the RedisTemplate and ObjectMapper beans used for interacting with Redis.
+ */
 @Profile("prod")
 @Configuration
-@EnableRedisRepositories
 @EnableCaching
+@EnableAspectJAutoProxy
 public class RedisConfig extends CachingConfigurerSupport {
 
+    /**
+     Creates a RedisTemplate bean with String key and value serializers.
+     @param connectionFactory The RedisConnectionFactory used to create the RedisTemplate.
+     @return The RedisTemplate instance.
+     */
     @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, String> template = new RedisTemplate<>();
@@ -27,6 +36,10 @@ public class RedisConfig extends CachingConfigurerSupport {
         return template;
     }
 
+    /**
+     Creates an ObjectMapper bean with JavaTimeModule registered.
+     @return The ObjectMapper instance.
+     */
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -34,3 +47,4 @@ public class RedisConfig extends CachingConfigurerSupport {
         return objectMapper;
     }
 }
+

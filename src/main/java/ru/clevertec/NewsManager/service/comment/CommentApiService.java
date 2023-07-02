@@ -41,12 +41,12 @@ public class CommentApiService implements CommentService{
      @param comment the comment request DTO
      @return the ID of the created comment
      */
-
-    @CachePut(value = "comment", key = "#id")
+    @CachePut(value = "commentCaches", key = "#result")
     @Transactional
     @Override
-    public long create(CommentRequestProtos.CommentRequestDto comment) {
+    public Long create(CommentRequestProtos.CommentRequestDto comment) {
         News news = newsService.read(comment.getNewsId());
+        System.out.println("news = " + news);
         Comment builderComment = CommentBuilder.buildCreateComment(comment);
         builderComment.setNews(news);
         return commentRepository.save(builderComment).getId();
@@ -58,8 +58,7 @@ public class CommentApiService implements CommentService{
      @return the retrieved comment
      @throws IllegalArgumentException if the comment ID is invalid
      */
-
-    @Cacheable(cacheNames = "comment", key = "#id", unless = "#result == null")
+    @Cacheable(cacheNames = "commentCaches", key = "#id", unless = "#result == null")
     @Override
     public Comment read(long id) {
         return commentRepository.findById(id).orElseThrow(() ->
@@ -72,8 +71,8 @@ public class CommentApiService implements CommentService{
      @param id the ID of the comment to update
      @throws AccessDeniedException if the current user is not the author of the comment
      */
-
-    @CachePut(value = "comment", key = "#id")
+    @CacheEvict(value = "commentCaches", key = "#id")
+    @CachePut(value = "commentCaches", key = "#id")
     @Override
     @Transactional
     public void update(CommentRequestProtos.CommentRequestDto comment, Long id) {
@@ -81,8 +80,8 @@ public class CommentApiService implements CommentService{
         Comment readComment = read(id);
         if (readComment.getUsername().equals(authentication.getName())) {
             LocalDateTime time = readComment.getTime();
-            readComment.setId(id);
             Comment builderUpdateComment = CommentBuilder.buildUpdateComment(comment, time);
+            builderUpdateComment.setId(id);
             commentRepository.save(builderUpdateComment);
         } else {
             throw new AccessDeniedException(
@@ -95,8 +94,7 @@ public class CommentApiService implements CommentService{
      @param id the ID of the comment to delete
      @throws AccessDeniedException if the current user is not the author of the comment
      */
-
-    @CacheEvict(value = "comment", key = "#id")
+    @CacheEvict(value = "commentCaches", key = "#id")
     @Override
     @Transactional
     public void delete(Long id) {
@@ -111,13 +109,10 @@ public class CommentApiService implements CommentService{
     }
 
     /**
-
      Retrieves all comments with pagination.
      @param pageable the pagination information
      @return the list of retrieved comments
      */
-
-    @Cacheable(cacheNames = "commentCaches")
     @Override
     public List<Comment> readAll(Pageable pageable) {
         return  commentRepository.findAll(pageable).getContent();
@@ -129,7 +124,6 @@ public class CommentApiService implements CommentService{
      @param date the search date
      @return the list of matching comments
      */
-
     @Override
     public List<Comment> searchComments(String query, LocalDateTime date) {
         if(Objects.nonNull(query)){

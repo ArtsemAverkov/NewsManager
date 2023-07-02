@@ -2,13 +2,11 @@ package ru.clevertec.NewsManager.common.cache;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-
 import ru.clevertec.NewsManager.aop.cache.LruCache;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsRequestDto;
 import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Unit tests for the LruCache class.

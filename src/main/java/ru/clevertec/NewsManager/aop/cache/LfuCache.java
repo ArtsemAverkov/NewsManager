@@ -2,7 +2,12 @@ package ru.clevertec.NewsManager.aop.cache;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Queue;
+import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Comparator;
 
 /**
  This class represents a Least Frequently Used (LFU) cache implementation.
