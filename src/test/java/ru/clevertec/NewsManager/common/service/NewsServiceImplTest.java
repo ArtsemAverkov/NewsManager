@@ -18,11 +18,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverCommentsRequestDto;
 import ru.clevertec.NewsManager.common.extension.ValidParameterResolverNewsRequestDto;
+import ru.clevertec.NewsManager.common.extension.ValidParameterResolverNewsResponseDto;
 import ru.clevertec.NewsManager.common.utill.RequestId;
 import ru.clevertec.NewsManager.common.utill.RequestName;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
-import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
+import ru.clevertec.NewsManager.dto.request.NewsRequestProtos;
+import ru.clevertec.NewsManager.dto.response.NewsResponseProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.entity.News;
 import ru.clevertec.NewsManager.repository.NewsRepository;
@@ -51,7 +52,10 @@ public class NewsServiceImplTest {
      * Nested class for valid data test cases.
      */
     @Nested
-    @ExtendWith({MockitoExtension.class, ValidParameterResolverNewsRequestDto.class, ValidParameterResolverCommentsRequestDto.class})
+    @ExtendWith({MockitoExtension.class,
+            ValidParameterResolverNewsRequestDto.class,
+            ValidParameterResolverCommentsRequestDto.class,
+            ValidParameterResolverNewsResponseDto.class})
     public class ValidData {
 
         @InjectMocks
@@ -74,7 +78,7 @@ public class NewsServiceImplTest {
          * @param news the news request DTO
          */
         @Test
-        void shouldReadNewsWhenNewsValid(NewsRequestDto news) {
+        void shouldReadNewsWhenNewsValid(NewsRequestProtos.NewsRequestDto news) {
             News newsCreate = buildCreateNews(news);
             when(newsRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.ofNullable(newsCreate));
             assertEquals(newsCreate, newsApiService.read(RequestId.VALUE_1.getValue()));
@@ -86,7 +90,7 @@ public class NewsServiceImplTest {
          * @param news the news request DTO
          */
         @Test
-        void shouldCreateUserWhenUserIsValid(NewsRequestDto news) {
+        void shouldCreateUserWhenUserIsValid(NewsRequestProtos.NewsRequestDto news) {
             News newsCreate = buildCreateNews(news);
             when(newsRepository.save(any(News.class))).thenReturn(newsCreate);
             assertEquals(RequestId.VALUE_1.getValue(), newsApiService.create(news));
@@ -98,13 +102,15 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldReadNewsWithCommentsWhenReadNewsWithCommentsIsActive(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void shouldReadNewsWithCommentsWhenReadNewsWithCommentsIsActive(NewsRequestProtos.NewsRequestDto news,
+                                                                        CommentRequestProtos.CommentRequestDto commentRequestDto) {
             News newsCreate = getNews(news, commentRequestDto);
-            NewsResponseDto newsResponseDto = buildResponse(newsCreate);
+            NewsResponseProtos.NewsResponseDto newsResponseDto1 = buildResponse(newsCreate);
+
             when(newsRepository.findById(RequestId.VALUE_1.getValue())).thenReturn(Optional.of(newsCreate));
             when(newsRepository.findNewsWithComments(RequestId.VALUE_1.getValue())).thenReturn(newsCreate);
 
-            assertEquals(newsResponseDto, newsApiService.readNewsWithComments(RequestId.VALUE_1.getValue()));
+            assertEquals(newsResponseDto1, newsApiService.readNewsWithComments(RequestId.VALUE_1.getValue()));
             verify(newsRepository, times(1)).findNewsWithComments(RequestId.VALUE_1.getValue());
         }
 
@@ -114,11 +120,12 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldSearchNewsWhenSearchNewsHasParameterQuery(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void shouldSearchNewsWhenSearchNewsHasParameterQuery(NewsRequestProtos.NewsRequestDto news,
+                                                             CommentRequestProtos.CommentRequestDto commentRequestDto) {
             News newsCreate = getNews(news, commentRequestDto);
             List<News> listNews = new ArrayList<>();
             listNews.add(newsCreate);
-            List<NewsResponseDto> newsResponseDtos = buildResponseList(listNews);
+            List<NewsResponseProtos.NewsResponseDto> newsResponseDtos = buildResponseList(listNews);
 
             when(newsRepository.searchNewsByQuery(RequestName.NAME.getValue()))
                     .thenReturn(listNews);
@@ -132,12 +139,13 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldSearchNewsWhenSearchNewsHasParameterDate(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void shouldSearchNewsWhenSearchNewsHasParameterDate(NewsRequestProtos.NewsRequestDto news,
+                                                            CommentRequestProtos.CommentRequestDto commentRequestDto) {
             News newsCreate = getNews(news, commentRequestDto);
             List<News> listNews = new ArrayList<>();
             listNews.add(newsCreate);
 
-            List<NewsResponseDto> newsResponseDtos = buildResponseList(listNews);
+            List<NewsResponseProtos.NewsResponseDto> newsResponseDtos = buildResponseList(listNews);
             LocalDateTime now = LocalDateTime.now();
 
             when(newsRepository.searchNewsByDate(now))
@@ -152,17 +160,17 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void shouldReadAllWhenUserIsValid(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void shouldReadAllWhenUserIsValid(NewsRequestProtos.NewsRequestDto news,
+                                          CommentRequestProtos.CommentRequestDto commentRequestDto) {
             News newsCreate = getNews(news, commentRequestDto);
             List<News> listNews = new ArrayList<>();
             listNews.add(newsCreate);
 
-            List<NewsResponseDto> newsResponseDtos = buildResponseList(listNews);
             Pageable pageable = PageRequest.of(0, 10, Sort.unsorted());
 
             when(newsRepository.findAll(pageable))
                     .thenReturn(new PageImpl<>(listNews));
-            assertEquals(newsResponseDtos, newsApiService.readAll(Pageable.ofSize(10).withPage(0)));
+            assertEquals(listNews, newsApiService.readAll(Pageable.ofSize(10).withPage(0)));
             verify(newsRepository, times(1)).findAll(Pageable.ofSize(10).withPage(0));
         }
 
@@ -172,7 +180,8 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testUpdateWithValidAuthorName(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void testUpdateWithValidAuthorName(NewsRequestProtos.NewsRequestDto news,
+                                           CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<Comment> commentList = getComments(commentRequestDto);
             News newsCreate = buildCreateNews(news);
@@ -190,7 +199,8 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testUpdateWithInvalidAuthorName(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void testUpdateWithInvalidAuthorName(NewsRequestProtos.NewsRequestDto news,
+                                             CommentRequestProtos.CommentRequestDto commentRequestDto) {
             List<Comment> commentList = getComments(commentRequestDto);
             News newsCreate = buildCreateNews(news);
             newsCreate.setAuthor(RequestName.ADMIN.getValue());
@@ -206,7 +216,8 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testDeleteWithValidAuthorName(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void testDeleteWithValidAuthorName(NewsRequestProtos.NewsRequestDto news,
+                                           CommentRequestProtos.CommentRequestDto commentRequestDto) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             List<Comment> commentList = getComments(commentRequestDto);
             News newsCreate = buildCreateNews(news);
@@ -225,7 +236,8 @@ public class NewsServiceImplTest {
          * @param commentRequestDto the comment request DTO
          */
         @Test
-        void testDeleteWithInvalidAuthorName(NewsRequestDto news, CommentRequestDto commentRequestDto) {
+        void testDeleteWithInvalidAuthorName(NewsRequestProtos.NewsRequestDto news,
+                                             CommentRequestProtos.CommentRequestDto commentRequestDto) {
             List<Comment> commentList = getComments(commentRequestDto);
             News newsCreate = buildCreateNews(news);
             newsCreate.setAuthor(RequestName.ADMIN.getValue());

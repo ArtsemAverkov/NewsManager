@@ -29,7 +29,7 @@ public class WireMockInitializer {
         wireMockServer.stubFor(get(urlEqualTo("/news-api/prod"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
-                        .withBodyFile("news-api.json")));
+                        .withBodyFile("news-api-prod.json")));
     }
 
     /**

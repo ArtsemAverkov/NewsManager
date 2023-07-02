@@ -9,6 +9,7 @@ import ru.clevertec.NewsManager.entity.News;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 /**
  The NewsRepository interface is a repository that provides data access and database operations
  for the News entity in the NewsManager application.

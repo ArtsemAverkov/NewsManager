@@ -1,6 +1,5 @@
 package ru.clevertec.NewsManager.aop.cache;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Component;
 
 @Component

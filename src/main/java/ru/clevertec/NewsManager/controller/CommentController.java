@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 import ru.clevertec.NewsManager.service.comment.CommentService;
+import ru.clevertec.controllerlogspringbootstarter.aop.loger.IncludeLog;
+import ru.clevertec.exceptionhandlerspringbootstarter.EnableExceptionHandling;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,6 +33,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/comment")
 @RequiredArgsConstructor
+@EnableExceptionHandling
+@IncludeLog
 public class CommentController {
 
     private final CommentService commentService;
@@ -38,10 +44,9 @@ public class CommentController {
      * @param comment the CommentRequestDto containing the comment details
      * @return the ID of the created comment
      */
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody @Valid CommentRequestDto comment){
+    public Long create(@RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
         return commentService.create(comment);
     }
 
@@ -50,7 +55,7 @@ public class CommentController {
      * @param id the ID of the comment
      * @return the Comment object
      */
-
+    @Transactional
     @GetMapping(value= "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Comment read(@PathVariable  @Valid Long id) {
@@ -63,10 +68,9 @@ public class CommentController {
      * @param id      the ID of the comment to update
      * @param comment the CommentRequestDto containing the updated comment details
      */
-
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestDto comment){
+    public void update(@PathVariable @Valid Long id, @RequestBody @Valid CommentRequestProtos.CommentRequestDto comment){
         commentService.update(comment, id);
     }
 
@@ -74,7 +78,6 @@ public class CommentController {
      * Deletes a comment by its ID.
      * @param id the ID of the comment to delete
      */
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable @Valid Long id){
@@ -87,7 +90,6 @@ public class CommentController {
      * @param date  the date to filter the comments
      * @return the list of matching comments
      */
-
     @GetMapping(value = "/search")
     @ResponseStatus(HttpStatus.OK)
     public List<Comment> searchComments(@RequestParam(required = false) String query,
@@ -100,7 +102,6 @@ public class CommentController {
      * @param pageable the Pageable object for pagination
      * @return the list of comments
      */
-
     @GetMapping
     public List<Comment> readAll(@PageableDefault Pageable pageable){
         return commentService.readAll(pageable);

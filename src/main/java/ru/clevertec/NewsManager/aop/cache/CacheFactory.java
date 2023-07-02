@@ -2,6 +2,9 @@ package ru.clevertec.NewsManager.aop.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 
@@ -12,7 +15,9 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Profile("test")
 public class CacheFactory {
+
     private final int maxSize;
     private final String algorithm;
 
@@ -23,9 +28,10 @@ public class CacheFactory {
      * @param algorithm the cache algorithm to be used
      */
 
+
     @Autowired
-    public CacheFactory(@Value("${cache.max-size}") int maxSize,
-                        @Value("${cache.algorithm}") String algorithm) {
+    public CacheFactory(@Value("${spring.cache.max-size}") int maxSize,
+                        @Value("${spring.cache.algorithm}") String algorithm) {
         this.maxSize = maxSize;
         this.algorithm = algorithm;
     }
@@ -43,7 +49,7 @@ public class CacheFactory {
                 return new LruCache<>(maxSize);
             case "LFU":
                 return new LfuCache<>(maxSize);
-            default:
+                default:
                 throw new IllegalArgumentException("Invalid cache algorithm: " + algorithm);
         }
     }

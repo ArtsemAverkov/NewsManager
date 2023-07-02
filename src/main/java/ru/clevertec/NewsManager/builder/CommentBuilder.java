@@ -2,7 +2,7 @@ package ru.clevertec.NewsManager.builder;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 
 import java.time.LocalDateTime;
@@ -21,10 +21,10 @@ public class CommentBuilder {
      * @return the built Comment object
      */
 
-    public static Comment buildCreateComment(CommentRequestDto commentRequestDto) {
+    public static Comment buildCreateComment(CommentRequestProtos.CommentRequestDto commentRequestDto) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     LocalDateTime now = LocalDateTime.now().withNano(0);
-    return Comment.builder()
+        return Comment.builder()
             .time(now)
             .text(commentRequestDto.getText())
             .username(authentication.getName())
@@ -39,7 +39,7 @@ public class CommentBuilder {
      * @return the built Comment object
      */
 
-    public static Comment buildUpdateComment(CommentRequestDto commentRequestDto, LocalDateTime data) {
+    public static Comment buildUpdateComment(CommentRequestProtos.CommentRequestDto commentRequestDto,  LocalDateTime data) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return Comment.builder()
                 .time(data)

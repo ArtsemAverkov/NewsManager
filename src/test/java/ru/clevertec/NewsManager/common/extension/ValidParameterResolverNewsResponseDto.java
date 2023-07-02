@@ -4,9 +4,8 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import ru.clevertec.NewsManager.dto.request.NewsRequestDto;
-import ru.clevertec.NewsManager.dto.responseNews.CommentResponseDto;
-import ru.clevertec.NewsManager.dto.responseNews.NewsResponseDto;
+import ru.clevertec.NewsManager.dto.response.CommentResponseProtos;
+import ru.clevertec.NewsManager.dto.response.NewsResponseProtos;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -16,25 +15,26 @@ import java.util.Random;
 public class ValidParameterResolverNewsResponseDto implements ParameterResolver {
 
 
-    List<CommentResponseDto> commentResponseDtoList = Arrays.asList(
-            new CommentResponseDto(
-                    LocalDateTime.now(),
-                    " text_comment",
-                    "user"
-            )
+    List<CommentResponseProtos.CommentResponseDto> commentResponseDtoList = Arrays.asList(
+            CommentResponseProtos.CommentResponseDto.newBuilder()
+                    .setTime(String.valueOf(LocalDateTime.now()))
+                    .setText("text_comment")
+                    .setUsername( "user")
+                    .build()
     );
 
-    private final List<NewsResponseDto> newsDtoList = Arrays.asList(
-            new NewsResponseDto
-                    (LocalDateTime.now(),
-                            "test_title",
-                            "test_text",
-                            "admin",
-                            commentResponseDtoList)
-    );
+    private final List<NewsResponseProtos.NewsResponseDto> newsDtoList = Arrays.asList(
+            NewsResponseProtos.NewsResponseDto.newBuilder()
+                    .setTime(String.valueOf(LocalDateTime.now()))
+                    .setTitle("test_title")
+                    .setText("test_text")
+                    .setAuthor("admin")
+                    .addAllComments(commentResponseDtoList)
+                    .build());
+
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return parameterContext.getParameter().getType() == NewsResponseDto.class;
+        return parameterContext.getParameter().getType() == NewsResponseProtos.NewsResponseDto.class;
     }
 
     @Override

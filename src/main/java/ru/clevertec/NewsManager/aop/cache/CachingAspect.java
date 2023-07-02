@@ -1,14 +1,15 @@
 package ru.clevertec.NewsManager.aop.cache;
 
-
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -20,27 +21,26 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Aspect
 @Component
-@RequiredArgsConstructor
+@Profile("test")
 public class CachingAspect  {
 
     private final Map<String, CacheI<String, Object>> caches = new ConcurrentHashMap<>();
 
-    private final CacheFactory cacheFactory;
+    @Autowired
+    private CacheFactory cacheFactory;
 
     /**
      * Intercepts the execution of methods annotated with @Cacheable and applies caching logic.
      *
      * @param joinPoint  the join point for the intercepted method
-     * @param cacheable  the @Cacheable annotation applied to the method
      * @return the cached value or the result of the method invocation
      * @throws Throwable if an exception occurs during method execution
      */
 
     @Around("@annotation(cacheable)")
-    public Object cache(ProceedingJoinPoint joinPoint, Cacheable cacheable) throws Throwable {
-        CacheI<String, Object> cache = caches.computeIfAbsent(cacheable.value(),
+    public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
+        CacheI<String, Object> cache = caches.computeIfAbsent("myCaches",
                 k -> cacheFactory.createCache());
-
         switch (joinPoint.getSignature().getName()) {
             case "read" -> {
                 String cacheKey = generateCacheKey(joinPoint);
@@ -85,7 +85,6 @@ public class CachingAspect  {
 
     /**
      * Generates a cache key based on the first argument of the intercepted method.
-     *
      * @param joinPoint the join point for the intercepted method
      * @return the generated cache key
      */

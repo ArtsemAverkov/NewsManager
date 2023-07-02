@@ -3,8 +3,7 @@ package ru.clevertec.NewsManager.common.utill;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.clevertec.NewsManager.common.utill.RequestId;
-import ru.clevertec.NewsManager.dto.request.CommentRequestDto;
+import ru.clevertec.NewsManager.dto.request.CommentRequestProtos;
 import ru.clevertec.NewsManager.entity.Comment;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ public class CommentBuilder {
      * @param commentRequestDto the CommentRequestDto containing the comment details
      * @return the built Comment object
      */
-    public static Comment builderComment(CommentRequestDto commentRequestDto) {
+    public static Comment builderComment(CommentRequestProtos.CommentRequestDto commentRequestDto) {
         return Comment.builder()
                 .id(RequestId.VALUE_1.getValue())
                 .time(LocalDateTime.now())
@@ -45,7 +44,7 @@ public class CommentBuilder {
      * @return the content in the specified format
      */
     @NotNull
-    public static  String getContent(CommentRequestDto commentRequestDto) {
+    public static  String getContent(CommentRequestProtos.CommentRequestDto commentRequestDto) {
         return "{\n" +
                 "  \"newsId\": " + commentRequestDto.getNewsId() + ",\n" +
                 "  \"text\": \"" + commentRequestDto.getText() + "\"\n" +

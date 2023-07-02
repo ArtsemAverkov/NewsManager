@@ -1,14 +1,17 @@
 version: '3.8'
+
 services:
   newsManager:
     build:
       context: services/newsManager
       dockerfile: Dockerfile
-    image: 'applicatio0:news'
+    image: 'news-manager:news'
     environment:
       - SPRING_APPLICATION_NAME=news-api
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
       - USER_MANAGER_URL=http://userManager:8084/users
     ports:
@@ -16,6 +19,9 @@ services:
     depends_on:
       - userManager
       - settingApiManager
+      - redis
+    networks:
+      - my_network
 
   userManager:
     build:
@@ -25,19 +31,23 @@ services:
       - SPRING_APPLICATION_NAME=user-api
       - SPRING_CONFIG_IMPORT=optional:configserver:http://settingApiManager:8086
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/root
-    image: 'applicatio0:user'
+    image: 'news-manager:user'
     ports:
       - 8084:8084
     depends_on:
       - settingApiManager
+    networks:
+      - my_network
 
   settingApiManager:
     build:
       context: services/settingApiManager
       dockerfile: Dockerfile
-    image: 'applicatio0:setting'
+    image: 'news-manager:setting'
     ports:
       - 8086:8086
+    networks:
+      - my_network
 
   postgres:
     build:
@@ -49,10 +59,16 @@ services:
       - POSTGRES_PASSWORD=root
     ports:
       - 5432:5432
+    networks:
+      - my_network
 
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - my_network
 
-
-
-
-
+networks:
+  my_network:
 
